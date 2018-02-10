@@ -65,3 +65,49 @@ Si l'option "o" n'est pas indiqué, le fichier converti sera sous la forme :
 NomDuFichierSource-Out.ExtensionDuFichierSource
 ```
 
+## Exemples
+
+### Exemple 1
+Commande : 
+```
+DetectEncoding.exe -f .\fileTest.sql
+```
+
+Sortie écran :
+
+    Encoding Detector with reencoding !
+    ===================================
+    by Aryx - Wolfaryx informatique - 2018
+    
+    Encoding detection based on work from AutoIt Consulting :
+    https://github.com/AutoItConsulting/text-encoding-detect
+    
+    InputFile: C:\Users\ARyx\fileTest.sql
+    Encoding: Ansi; Unix
+
+Ici, l'encodage du fichier fileTest.sql est détecté comme de l'Ansi.
+Son caractère de fin de ligne est "\n", de type Unix.
+
+### Exemple 2
+Commande : 
+```
+DetectEncoding.exe -f .\fileTest.sql -c UTF8_BOM -e DOS
+```
+
+Sortie écran :
+
+    Encoding Detector with reencoding !
+    ===================================
+    by Aryx - Wolfaryx informatique - 2018
+    
+    
+    Encoding detection based on work from AutoIt Consulting :
+    https://github.com/AutoItConsulting/text-encoding-detect
+    
+    InputFile: C:\Users\ARyx\fileTest.sql
+    Encoding: Ansi; Unix
+    Output : Encoding: UTF8_BOM; DOS
+
+Ici, l'encodage du fichier fileTest.sql est détecté comme étant de l'ANSI.
+Son caractère de fin de ligne est "\n", de type Unix.
+Le fichier de sorti sera encodé en UTF8 avec BOM, et avec un caractère de fin de ligne "\r\n".
