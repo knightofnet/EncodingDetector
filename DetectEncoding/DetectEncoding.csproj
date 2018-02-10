@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AryxDevLibrary, Version=1.0.1.658, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AryxDevLibrary.1.0.1.658\lib\net35-client\AryxDevLibrary.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,10 +54,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\AryxDevLibrary\AryxDevLibrary.csproj">
-      <Project>{e7ded023-f57f-4715-bc8d-752b60b6a203}</Project>
-      <Name>AryxDevLibrary</Name>
-    </ProjectReference>
     <ProjectReference Include="E:\CSharp\Projects\Ext\text-encoding-detect\TextEncodingDetect-C#\TextEncodingDetect\TextEncodingDetect.csproj">
       <Project>{9e3c3ce1-23dd-4a1b-b927-92d6be3011a2}</Project>
       <Name>TextEncodingDetect</Name>
@@ -61,6 +61,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="utils\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
