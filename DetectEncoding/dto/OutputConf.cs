@@ -12,18 +12,18 @@ namespace DetectEncoding.dto
 
         public EnumAppEncoding InputEncoding { get; set; }
 
-        public EnumEOL InputEol { get; set; }
+        public EnumEol InputEol { get; set; }
 
         public EnumAppEncoding OutputEncoding { get; set; }
 
-        public EnumEOL OutputEol { get; set; }
+        public EnumEol OutputEol { get; set; }
 
         public string OutputFileName { get; set; }
 
         public OutputConf()
         {
-            InputEol = EnumEOL.NONE;
-            OutputEol = EnumEOL.NONE;
+            InputEol = EnumEol.NONE;
+            OutputEol = EnumEol.NONE;
         }
 
     }

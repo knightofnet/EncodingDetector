@@ -15,7 +15,7 @@ namespace DetectEncoding.dto
 
         public EnumAppEncoding OutputEncoding { get; set; }
 
-        public EnumEOL OutputEol { get; set; }
+        public EnumEol OutputEol { get; set; }
 
         public string OutputFileName { get; set; }
     }

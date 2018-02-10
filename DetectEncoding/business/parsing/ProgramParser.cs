@@ -32,11 +32,11 @@ namespace DetectEncoding.business.parsing
             Name = "TargetEnc"
         };
 
-        private readonly Option _optionTargetEOL = new Option()
+        private readonly Option _optionTargetEol = new Option()
         {
             ShortOpt = "e",
             LongOpt = "end-of-line-to",
-            Description = "Convertie le caractère de fin de ligne : DOS, UNIX. La conversion n'est possible que si l'encodage source a été détecté.",
+            Description = String.Format("Convertie le caractère de fin de ligne : {0}. La conversion n'est possible que si l'encodage source a été détecté.", EnumEol.LibelleJoined()),
             HasArgs = true,
             IsMandatory = false,
             Name = "TargetEol"
@@ -58,7 +58,7 @@ namespace DetectEncoding.business.parsing
         {
             AddOption(_optionFile);
             AddOption(_optionTargetEnc);
-            AddOption(_optionTargetEOL);
+            AddOption(_optionTargetEol);
             AddOption(_optionOutputFile);
         }
 
@@ -71,7 +71,7 @@ namespace DetectEncoding.business.parsing
         private ProgramArgs ParseTrt(Dictionary<string, Option> arg)
         {
             ProgramArgs p = new ProgramArgs();
-            p.OutputEol = EnumEOL.NONE;
+            p.OutputEol = EnumEol.NONE;
 
             string fileUrl = GetSingleOptionValue(_optionFile.Name, arg);
             string fullPath = Path.GetFullPath(fileUrl);
@@ -81,23 +81,22 @@ namespace DetectEncoding.business.parsing
             }
             p.InputFileName = fullPath;
 
-            if (HasOption(_optionTargetEOL.Name, arg) || HasOption(_optionTargetEnc.Name, arg) ||
+            if (HasOption(_optionTargetEol.Name, arg) || HasOption(_optionTargetEnc.Name, arg) ||
                 HasOption(_optionOutputFile.Name, arg))
             {
                 p.IsConvertMode = true;
             }
 
-            if (HasOption(_optionTargetEOL.Name, arg))
+            if (HasOption(_optionTargetEol.Name, arg))
             {
-                string eolInput = GetSingleOptionValue(_optionTargetEOL.Name, arg).ToUpper();
-                if ("DOS".Equals(eolInput))
+                string eolInput = GetSingleOptionValue(_optionTargetEol.Name, arg).ToUpper();
+                EnumEol enEolIn = EnumEol.GetFromLibelle(eolInput.ToUpper());
+                if (enEolIn == null)
                 {
-                    p.OutputEol = EnumEOL.DOS;
+                    throw new CliParsingException(String.Format("Le type de caractère de fin de ligne {0} n'existe pas. Type de caractères de fin de ligne possibles : ", eolInput, EnumEol.LibelleJoined()));
                 }
-                else if ("UNIX".Equals(eolInput))
-                {
-                    p.OutputEol = EnumEOL.UNIX;
-                }
+
+                p.OutputEol = enEolIn;
             }
 
             if (HasOption(_optionTargetEnc.Name, arg))
