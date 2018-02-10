@@ -20,4 +20,48 @@ Encoding Detector fonctionne comme une application console, c'est-à-dire via un
 DetectEncoding.exe -f fichier 
 [-c UTF8_BOM|UTF8_NOBOM|ANSI|UTF16LE|UTF16BE|UTF16LE_NOBOM|UTF16BE_NOBOM|ASCII] [-e DOS|UNIX] [-o cibleConversion]
 ```
+### Détails
+#### Fichier à traiter
+
+**Obligatoire**
+
+**Option :** -f ou --file
+
+**Description :** Indique le chemin du fichier pour lequel il faut déterminer l'encodage et le caractère de fin de ligne.
+
+### Conversion de l'encodage
+
+**Option :** -c ou --convert-to
+
+**Description :** Spécifie l'encodage cible désiré.
+
+**Choix :**
+UTF8_BOM, UTF8_NOBOM, ANSI, UTF16LE, UTF16BE, UTF16LE_NOBOM, UTF16BE_NOBOM, ASCII
+
+### Conversion du caractère de fin de ligne
+
+**Option :** -e ou --end-of-line-to
+
+**Description :** Spécifie le caractère de fin ligne cible désiré.
+
+**Choix :**
+DOS : pour un caractère de fin de ligne \r\n. Utilisé dans les produits Microsoft (DOS, Windows)
+
+UNIX : pour un caractère de fin de ligne  \n.
+
+### Nom du fichier converti
+
+**Option :** -o ou --output-file
+
+**Description :** Nom désiré du fichier converti.
+
+## Conversion
+
+La conversion de l'encodage et du caractère de fin de ligne ne s'effectue que lorsque l'encodage du fichier à traiter à réussi. Si pour une raison ou une autre l'encodage du fichier source n'est pas détecté, la conversion ne sera pas effectuée.
+
+Si l'option "o" n'est pas indiqué, le fichier converti sera sous la forme :
+
+```
+NomDuFichierSource-Out.ExtensionDuFichierSource
+```
 
