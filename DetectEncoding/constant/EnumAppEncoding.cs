@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AryxDevLibrary.utils;
 
 namespace DetectEncoding.constant
 {
@@ -52,5 +53,25 @@ namespace DetectEncoding.constant
 
         }
 
+        public static string LibelleJoined()
+        {
+            List<String> strRet = Values.Select(value => value.Libelle).ToList();
+
+            return String.Join(", ", strRet);
+        }
+
+        public static EnumAppEncoding GetFromLibelle(string encodingInput)
+        {
+            if (StringUtils.IsNullOrWhiteSpace(encodingInput))
+            {
+                return null;
+            }
+
+            foreach (var value in Values)
+            {
+                if (encodingInput.Equals(value.Libelle)) return value;
+            }
+            return null;
+        }
     }
 }

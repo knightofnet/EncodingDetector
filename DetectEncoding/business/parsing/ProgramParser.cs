@@ -26,7 +26,7 @@ namespace DetectEncoding.business.parsing
         {
             ShortOpt = "c",
             LongOpt = "convert-to",
-            Description = "Convertie l'encodage du fichier analysé dans un encodage cible : UTF8, UTF8_NOBOM, ANSI. La conversion en se fait que si l'encodage source a été détecté.",
+            Description = String.Format("Convertie l'encodage du fichier analysé dans un encodage cible : {0}. La conversion n'est possible que si l'encodage source a été détecté.", EnumAppEncoding.LibelleJoined()),
             HasArgs = true,
             IsMandatory = false,
             Name = "TargetEnc"
@@ -36,7 +36,7 @@ namespace DetectEncoding.business.parsing
         {
             ShortOpt = "e",
             LongOpt = "end-of-line-to",
-            Description = "Convertie le caractère de fin de ligne : DOS, UNIX. La conversion en se fait que si l'encodage source a été détecté.",
+            Description = "Convertie le caractère de fin de ligne : DOS, UNIX. La conversion n'est possible que si l'encodage source a été détecté.",
             HasArgs = true,
             IsMandatory = false,
             Name = "TargetEol"
@@ -103,25 +103,28 @@ namespace DetectEncoding.business.parsing
             if (HasOption(_optionTargetEnc.Name, arg))
             {
                 string encodingInput = GetSingleOptionValue(_optionTargetEnc.Name, arg).ToUpper();
-                if ("UTF8".Equals(encodingInput) || "UTF-8".Equals(encodingInput) || "UTF8BOM".Equals(encodingInput) || EnumAppEncoding.UTF8_BOM.Libelle.Equals(encodingInput))
+
+                EnumAppEncoding enEncIn = EnumAppEncoding.GetFromLibelle(encodingInput);
+                if (enEncIn != null)
                 {
-                    p.OutputEncoding = EnumAppEncoding.UTF8_BOM;
+                    p.OutputEncoding = enEncIn;
                 }
-                if ("UTF8NOBOM".Equals(encodingInput) | "UTF-8-NOBOM".Equals(encodingInput) || EnumAppEncoding.UTF8_NOBOM.Libelle.Equals(encodingInput))
+                else
                 {
-                    p.OutputEncoding = EnumAppEncoding.UTF8_NOBOM;
-                }
-                else if ("ANSI".Equals(encodingInput) || EnumAppEncoding.ANSI.Libelle.Equals(encodingInput))
-                {
-                    p.OutputEncoding = EnumAppEncoding.ANSI;
-                }
-                else if (EnumAppEncoding.UTF16BE_BOM.Libelle.Equals(encodingInput))
-                {
-                    p.OutputEncoding = EnumAppEncoding.UTF16BE_BOM;
-                }
-                else if (EnumAppEncoding.UTF16LE_BOM.Libelle.Equals(encodingInput))
-                {
-                    p.OutputEncoding = EnumAppEncoding.UTF16LE_BOM;
+
+                    if ("UTF8".Equals(encodingInput) || "UTF-8".Equals(encodingInput) || "UTF8BOM".Equals(encodingInput))
+                    {
+                        p.OutputEncoding = EnumAppEncoding.UTF8_BOM;
+                    }
+                    if ("UTF8NOBOM".Equals(encodingInput) | "UTF-8-NOBOM".Equals(encodingInput))
+                    {
+                        p.OutputEncoding = EnumAppEncoding.UTF8_NOBOM;
+                    }
+                    else if ("ANSI".Equals(encodingInput))
+                    {
+                        p.OutputEncoding = EnumAppEncoding.ANSI;
+                    }
+
                 }
             }
 

@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DetectEncoding", "DetectEncoding\DetectEncoding.csproj", "{82D05B7B-F006-4142-9E32-EBBB67D04875}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E7DED023-F57F-4715-BC8D-752B60B6A203} = {E7DED023-F57F-4715-BC8D-752B60B6A203}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextEncodingDetect", "E:\CSharp\Projects\Ext\text-encoding-detect\TextEncodingDetect-C#\TextEncodingDetect\TextEncodingDetect.csproj", "{9E3C3CE1-23DD-4A1B-B927-92D6BE3011A2}"
 EndProject
