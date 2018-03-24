@@ -57,7 +57,7 @@ UNIX : pour un caractère de fin de ligne  \n.
 
 ### Niveau de silence
 
-**Option :** -s ou --output-file
+**Option :** -s ou --silence-level
 
 **Description :** Permet de régler le nombre d'éléments affichés dans la console. Selon 3 niveaux :
 
