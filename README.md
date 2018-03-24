@@ -55,6 +55,16 @@ UNIX : pour un caractère de fin de ligne  \n.
 
 **Description :** Nom désiré du fichier converti.
 
+### Niveau de silence
+
+**Option :** -s ou --output-file
+
+**Description :** Permet de régler le nombre d'éléments affichés dans la console. Selon 3 niveaux :
+
+* 0 : Affiche le texte de présentation de l'application, ainsi que les lignes de traitement. Niveau par défaut.
+* 1 : Affiche uniquement les lignes de traitement.
+* 2 : N'affiche rien.
+
 ## Conversion
 
 La conversion de l'encodage et du caractère de fin de ligne ne s'effectue que lorsque l'encodage du fichier à traiter à réussi. Si pour une raison ou une autre l'encodage du fichier source n'est pas détecté, la conversion ne sera pas effectuée.
@@ -111,3 +121,17 @@ Sortie écran :
 Ici, l'encodage du fichier fileTest.sql est détecté comme étant de l'ANSI.
 Son caractère de fin de ligne est "\n", de type Unix.
 Le fichier de sorti sera encodé en UTF8 avec BOM, et avec un caractère de fin de ligne "\r\n".
+
+### Exemple 3
+Commande : 
+```
+DetectEncoding.exe -f .\fileTest.sql -c UTF8_BOM -e DOS -s 1
+```
+
+Sortie écran :
+
+    InputFile: C:\Users\ARyx\fileTest.sql
+    Encoding: Ansi; Unix
+    Output : Encoding: UTF8_BOM; DOS
+
+Ici, le résultat de cet exemple est similaire à celui de l'exemple 2. Seul change, l'ajout de l'option s 1. Le texte de présentation de l'application n'est plus affiché.
