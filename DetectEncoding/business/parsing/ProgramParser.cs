@@ -53,7 +53,8 @@ namespace DetectEncoding.business.parsing
             ShortOpt = "o",
             LongOpt = "output-file",
             Description = "Fichier cible pour la conversion. Si omis, le fichier se présentera sous la forme " +
-                          "[Nom fichier input]-Conv[Extension fichier input].",
+                          "[Nom fichier input]-Out[Extension fichier input]. Si égale \"SAME_AS_INPUT\" alors " +
+                          "même fichier que celui de l'option -f",
             HasArgs = true,
             IsMandatory = false,
             Name = "OutputFile"
@@ -63,8 +64,8 @@ namespace DetectEncoding.business.parsing
         {
             ShortOpt = "s",
             LongOpt = "silence-level",
-            Description = "Permet de régler le nombre d'éléments affiché. 0 : tout est affiché (comme si -s absent)," +
-                          " 1: juste les lignes de traitements, 2: rien n'est affiché",
+            Description = "Permet de régler le nombre d'éléments affichés. 0 : tout est affiché (comme si -s absent)," +
+                          " 1: juste les lignes de traitement, 2: rien n'est affiché",
             HasArgs = true,
             IsMandatory = false,
             Name = "SilenceLevel"
@@ -211,7 +212,13 @@ namespace DetectEncoding.business.parsing
 
             if (HasOption(_optionOutputFile.Name, arg))
             {
-                p.OutputFileName = GetSingleOptionValue(_optionOutputFile.Name, arg);
+
+                String outputFile = GetSingleOptionValue(_optionOutputFile.Name, arg);
+                if ("SAME_AS_INPUT".Equals(outputFile))
+                {
+                    outputFile = p.InputFileName;
+                }
+                p.OutputFileName = outputFile;
             }
 
 

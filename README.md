@@ -53,7 +53,11 @@ UNIX : pour un caractère de fin de ligne  \n.
 
 **Option :** -o ou --output-file
 
-**Description :** Nom désiré du fichier converti.
+**Description :** Nom désiré du fichier converti. 
+Si une des options -e ou -c est utilisée, et que -o est omis, le fichier en sortie aura le même nom que le fichier en entrée, suffixé avec "Out".
+Si la valeur "SAME_AS_INPUT" est indiquée pour -o, alors le nom du fichier en sortie sera le même que celui en entrée : le fichier en entrée sera remplacé par sa conversion.
+
+Attention : aucune sauvegarde du fichier en entrée n'est effectuée.
 
 ### Niveau de silence
 
