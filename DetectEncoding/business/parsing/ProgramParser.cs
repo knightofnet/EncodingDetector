@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using AryxDevLibrary.utils;
 using AryxDevLibrary.utils.cliParser;
 using DetectEncoding.constant;
 using DetectEncoding.dto;
@@ -26,7 +28,9 @@ namespace DetectEncoding.business.parsing
         {
             ShortOpt = "c",
             LongOpt = "convert-to",
-            Description = String.Format("Convertie l'encodage du fichier analysé dans un encodage cible : {0}. La conversion n'est possible que si l'encodage source a été détecté.", EnumAppEncoding.LibelleJoined()),
+            Description = String.Format("Convertie l'encodage du fichier analysé dans un encodage cible : {0}. " +
+                                        "La conversion n'est possible que si l'encodage source a été détecté.",
+                                        EnumAppEncoding.LibelleJoined()),
             HasArgs = true,
             IsMandatory = false,
             Name = "TargetEnc"
@@ -36,7 +40,9 @@ namespace DetectEncoding.business.parsing
         {
             ShortOpt = "e",
             LongOpt = "end-of-line-to",
-            Description = String.Format("Convertie le caractère de fin de ligne : {0}. La conversion n'est possible que si l'encodage source a été détecté.", EnumEol.LibelleJoined()),
+            Description = String.Format("Convertie le caractère de fin de ligne : {0}. La conversion n'est possible " +
+                                        "que si l'encodage source a été détecté.",
+                                        EnumEol.LibelleJoined()),
             HasArgs = true,
             IsMandatory = false,
             Name = "TargetEol"
@@ -46,10 +52,22 @@ namespace DetectEncoding.business.parsing
         {
             ShortOpt = "o",
             LongOpt = "output-file",
-            Description = "Fichier cible pour la conversion. Si omis, le fichier se présentera sous la forme [Nom fichier input]-Conv[Extension fichier input].",
+            Description = "Fichier cible pour la conversion. Si omis, le fichier se présentera sous la forme " +
+                          "[Nom fichier input]-Conv[Extension fichier input].",
             HasArgs = true,
             IsMandatory = false,
             Name = "OutputFile"
+        };
+
+        private readonly Option _optionSilenceLevel = new Option()
+        {
+            ShortOpt = "s",
+            LongOpt = "silence-level",
+            Description = "Permet de régler le nombre d'éléments affiché. 0 : tout est affiché (comme si -s absent)," +
+                          " 1: juste les lignes de traitements, 2: rien n'est affiché",
+            HasArgs = true,
+            IsMandatory = false,
+            Name = "SilenceLevel"
         };
 
 
@@ -60,12 +78,53 @@ namespace DetectEncoding.business.parsing
             AddOption(_optionTargetEnc);
             AddOption(_optionTargetEol);
             AddOption(_optionOutputFile);
+            AddOption(_optionSilenceLevel);
         }
 
 
         public override ProgramArgs ParseDirect(string[] args)
         {
             return Parse(args, ParseTrt);
+        }
+
+        public ProgramArgs EarlyParse(string[] args)
+        {
+            ClearOptions();
+            AddOption(_optionSilenceLevel);
+
+            ProgramArgs pargs = Parse(args, delegate(Dictionary<string, Option> arg)
+            {
+
+                ProgramArgs p = new ProgramArgs();
+
+                string silenceLevelRaw = GetSingleOptionValue(_optionSilenceLevel.Name, arg);
+                if (!StringUtils.IsEmpty(silenceLevelRaw))
+                {
+                    short result = 0;
+                    if (Int16.TryParse(silenceLevelRaw, out result) && result >= 0 && result <= 2)
+                    {
+                        p.SilenceLevel = result;
+                    }
+                }
+                else
+                {
+                    p.SilenceLevel = 0;
+                }
+
+                return p;
+
+            });
+
+            ClearOptions();
+            AddOption(_optionFile);
+            AddOption(_optionTargetEnc);
+            AddOption(_optionTargetEol);
+            AddOption(_optionOutputFile);
+            AddOption(_optionSilenceLevel);
+
+            return pargs;
+
+
         }
 
         private ProgramArgs ParseTrt(Dictionary<string, Option> arg)
@@ -81,6 +140,26 @@ namespace DetectEncoding.business.parsing
             }
             p.InputFileName = fullPath;
 
+            string silenceLevelRaw = GetSingleOptionValue(_optionSilenceLevel.Name, arg);
+            if (!StringUtils.IsEmpty(silenceLevelRaw))
+            {
+                short result = 0;
+                if (Int16.TryParse(silenceLevelRaw, out result) && result >= 0 && result <= 2)
+                {
+                    p.SilenceLevel = result;
+                }
+                else
+                {
+                    throw new CliParsingException(String.Format("L'option -s doit être un entier de 0 à 2." +
+                                                                " '{0}' fournit.",
+                        result));
+                }
+            }
+            else
+            {
+                p.SilenceLevel = 0;
+            }
+
             if (HasOption(_optionTargetEol.Name, arg) || HasOption(_optionTargetEnc.Name, arg) ||
                 HasOption(_optionOutputFile.Name, arg))
             {
@@ -93,7 +172,10 @@ namespace DetectEncoding.business.parsing
                 EnumEol enEolIn = EnumEol.GetFromLibelle(eolInput.ToUpper());
                 if (enEolIn == null)
                 {
-                    throw new CliParsingException(String.Format("Le type de caractère de fin de ligne {0} n'existe pas. Type de caractères de fin de ligne possibles : ", eolInput, EnumEol.LibelleJoined()));
+                    throw new CliParsingException(
+                        String.Format("Le type de caractère de fin de ligne {0} n'existe pas. " +
+                                      "Type de caractères de fin de ligne possibles : {1}",
+                                      eolInput, EnumEol.LibelleJoined()));
                 }
 
                 p.OutputEol = enEolIn;
@@ -137,5 +219,7 @@ namespace DetectEncoding.business.parsing
 
 
         }
+
+
     }
 }

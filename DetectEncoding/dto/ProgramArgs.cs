@@ -18,5 +18,7 @@ namespace DetectEncoding.dto
         public EnumEol OutputEol { get; set; }
 
         public string OutputFileName { get; set; }
+        public int SilenceLevel { get; set; }
+
     }
 }

@@ -23,23 +23,35 @@ namespace DetectEncoding
             ProgramParser argParser = new ProgramParser();
             try
             {
-                ShowHeaderApp();
-
                 // Lecture des options d'entrée.
                 ProgramArgs objArgs = argParser.ParseDirect(args);
 
-                Console.WriteLine(" InputFile: {0}", objArgs.InputFileName);
-
-                var result = DetectorsUtils.DetectEncoding(objArgs.InputFileName);
-                if (result == TextEncodingDetect.Encoding.None)
+                if (objArgs.SilenceLevel < 1)
                 {
-                    Console.WriteLine(" No encoding found");
+                    ShowHeaderApp();
+                }
+
+                if (objArgs.SilenceLevel < 2)
+                {
+                    Console.WriteLine(" InputFile: {0}", objArgs.InputFileName);
+                }
+
+                var resultDEncodingInFile = DetectorsUtils.DetectEncoding(objArgs.InputFileName);
+                if (resultDEncodingInFile == TextEncodingDetect.Encoding.None)
+                {
+                    if (objArgs.SilenceLevel < 2)
+                    {
+                        Console.WriteLine(" No encoding found");
+                    }
                     return;
                 }
 
-                EnumAppEncoding inEncTransType = MiscAppUtils.FromTextEncoding(result);
+                EnumAppEncoding inEncTransType = MiscAppUtils.FromTextEncoding(resultDEncodingInFile);
                 EnumEol resultEol = DetectorsUtils.DetectEol(objArgs.InputFileName, inEncTransType);
-                Console.WriteLine(" Encoding: {0}; {1}", result, resultEol.Libelle);
+                if (objArgs.SilenceLevel < 2)
+                {
+                    Console.WriteLine(" Encoding: {0}; {1}", resultDEncodingInFile, resultEol.Libelle);
+                }
 
 
                 OutputConf outConf = new OutputConf
@@ -57,13 +69,19 @@ namespace DetectEncoding
                 outConf.OutputFileName = objArgs.OutputFileName;
                 outConf.OutputEol = objArgs.OutputEol;
 
+
                 if (outConf.InputEncoding != null)
                 {
+                    outConf.InputEol = resultEol;
                     SetDefaultValueForConverter(objArgs.InputFileName, outConf);
 
-                    Console.WriteLine(" Output : Encoding: {0}; {1}", outConf.OutputEncoding.Libelle, outConf.OutputEol.Libelle);
+                    if (objArgs.SilenceLevel < 2)
+                    {
+                        Console.WriteLine(" Output : Encoding: {0}; {1}", outConf.OutputEncoding.Libelle,
+                            outConf.OutputEol.Libelle);
+                    }
 
-                    outConf.InputEol = resultEol;
+
 
                     OutputFileWriter ofwWriter = new OutputFileWriter(objArgs.InputFileName, outConf);
                     ofwWriter.ToFile();
@@ -78,13 +96,33 @@ namespace DetectEncoding
             catch (CliParsingException e)
             {
 
+                ProgramArgs objArgs = argParser.EarlyParse(args);
+                if (objArgs.SilenceLevel < 1)
+                {
+                    ShowHeaderApp();
+                }
 # if DEBUG
                 Console.Write(e);
 # else
-                Console.Write(e.Message);
+                if (objArgs.SilenceLevel < 2) {
+                    Console.Write(e.Message);
+                }
 # endif
-                argParser.ShowSyntax();
+                if (objArgs.SilenceLevel < 1)
+                {
+                    argParser.ShowSyntax();
+                }
 
+            }
+            catch (Exception e)
+            {
+# if DEBUG
+                Console.Write(e);
+# else
+
+                Console.Write(e.Message);
+                
+# endif
             }
 
         }
