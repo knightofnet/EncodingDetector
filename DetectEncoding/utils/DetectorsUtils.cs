@@ -24,35 +24,54 @@ namespace DetectEncoding.utils
 
         public static EnumEol DetectEol(string filename, EnumAppEncoding inEncoding)
         {
-            EnumEol enumRet = EnumEol.UNIX;
+            EnumEol enumRet = EnumEol.NONE;
+
+
 
             using (StreamReader sr = StreamUtils.GetStreamReaderFromEAppEncoding(filename, inEncoding))
             {
-
+                // Il faut au minimum 2 caractères pour déterminer le EOL
                 if (sr.BaseStream.Length < 2)
                 {
                     return enumRet;
                 }
 
-                int n1 = 0;
-                int c = 0;
-                int p = 0;
+                int charAtN1 = 0;
+                int charAtN = 0;
+                int positionN = 0;
+
+
+
                 while (sr.Peek() >= 0)
                 {
-                    p++;
+                    positionN++;
 
-                    if (p > 1)
+                    if (positionN > 1)
                     {
-                        n1 = c;
+                        charAtN1 = charAtN;
+                    }
+                    charAtN = sr.Read();
+
+                    // Il faut au minimum 2 caractères pour déterminer le EOL
+                    if (positionN <= 1) continue;
+
+                    if (charAtN == 10 && charAtN1 == 13)
+                    {
+                        enumRet = EnumEol.DOS;
+                    }
+                    else if (charAtN1 == 10)
+                    {
+                        enumRet = EnumEol.UNIX;
+                    }
+                    else if (charAtN1 == 13)
+                    {
+                        enumRet = EnumEol.MACOS;
                     }
 
-                    c = sr.Read();
-
-                    if (c == 10 && p > 1)
+                    if (enumRet != EnumEol.NONE)
                     {
-                        enumRet = n1 == 13 ? EnumEol.DOS : EnumEol.UNIX;
+                        return enumRet;
                     }
-
                 }
 
             }

@@ -12,7 +12,7 @@ namespace DetectEncoding.constant
         public static readonly EnumEol NONE = new EnumEol("NONE", "");
         public static readonly EnumEol DOS = new EnumEol("DOS", "\r\n");
         public static readonly EnumEol UNIX = new EnumEol("UNIX", "\n");
-
+        public static readonly EnumEol MACOS = new EnumEol("MACOS", "\r");
 
 
 
@@ -23,7 +23,7 @@ namespace DetectEncoding.constant
                 yield return NONE;
                 yield return DOS;
                 yield return UNIX;
-
+                yield return MACOS;
             }
         }
 
