@@ -18,7 +18,7 @@ namespace DetectEncoding.business.parsing
         {
             ShortOpt = "f",
             LongOpt = "file",
-            Description = "chemin du fichier à analyser",
+            Description = LangMgr.Instance["parserOptFileDesc"],
             HasArgs = true,
             IsMandatory = true,
             Name = "OptionFile"
@@ -28,8 +28,7 @@ namespace DetectEncoding.business.parsing
         {
             ShortOpt = "c",
             LongOpt = "convert-to",
-            Description = String.Format("Convertie l'encodage du fichier analysé dans un encodage cible : {0}. " +
-                                        "La conversion n'est possible que si l'encodage source a été détecté.",
+            Description = String.Format(LangMgr.Instance["parserOptTargetEncDesc"],
                                         EnumAppEncoding.LibelleJoined()),
             HasArgs = true,
             IsMandatory = false,
@@ -40,8 +39,7 @@ namespace DetectEncoding.business.parsing
         {
             ShortOpt = "e",
             LongOpt = "end-of-line-to",
-            Description = String.Format("Convertie le caractère de fin de ligne : {0}. La conversion n'est possible " +
-                                        "que si l'encodage source a été détecté.",
+            Description = String.Format(LangMgr.Instance["parserOptTargetEolDesc"],
                                         EnumEol.LibelleJoined()),
             HasArgs = true,
             IsMandatory = false,
@@ -52,9 +50,7 @@ namespace DetectEncoding.business.parsing
         {
             ShortOpt = "o",
             LongOpt = "output-file",
-            Description = "Fichier cible pour la conversion. Si omis, le fichier se présentera sous la forme " +
-                          "[Nom fichier input]-Out[Extension fichier input]. Si égale \"SAME_AS_INPUT\" alors " +
-                          "même fichier que celui de l'option -f",
+            Description = LangMgr.Instance["parserOptOutputFileDesc"],
             HasArgs = true,
             IsMandatory = false,
             Name = "OutputFile"
@@ -64,8 +60,7 @@ namespace DetectEncoding.business.parsing
         {
             ShortOpt = "s",
             LongOpt = "silence-level",
-            Description = "Permet de régler le nombre d'éléments affichés. 0 : tout est affiché (comme si -s absent)," +
-                          " 1: juste les lignes de traitement, 2: rien n'est affiché",
+            Description = LangMgr.Instance["parserOptSilenceLevelDesc"],
             HasArgs = true,
             IsMandatory = false,
             Name = "SilenceLevel"
@@ -137,7 +132,7 @@ namespace DetectEncoding.business.parsing
             string fullPath = Path.GetFullPath(fileUrl);
             if (!File.Exists(fullPath))
             {
-                throw new CliParsingException(String.Format("Le fichier {0} n'existe pas", fullPath));
+                throw new CliParsingException(String.Format(LangMgr.Instance["parserParseTrtFileNotFoundTxt"], fullPath));
             }
             p.InputFileName = fullPath;
 
@@ -151,8 +146,7 @@ namespace DetectEncoding.business.parsing
                 }
                 else
                 {
-                    throw new CliParsingException(String.Format("L'option -s doit être un entier de 0 à 2." +
-                                                                " '{0}' fournit.",
+                    throw new CliParsingException(String.Format(LangMgr.Instance["parserParseTrtSilenceLvlWrontTxt"],
                         result));
                 }
             }
@@ -174,8 +168,7 @@ namespace DetectEncoding.business.parsing
                 if (enEolIn == null)
                 {
                     throw new CliParsingException(
-                        String.Format("Le type de caractère de fin de ligne {0} n'existe pas. " +
-                                      "Type de caractères de fin de ligne possibles : {1}",
+                        String.Format(LangMgr.Instance["parserParseTrtEolNotExistTxt"],
                                       eolInput, EnumEol.LibelleJoined()));
                 }
 

@@ -21,6 +21,7 @@ namespace DetectEncoding
         static void Main(string[] args)
         {
             ProgramParser argParser = new ProgramParser();
+            var l = LangMgr.Instance;
             try
             {
                 // Lecture des options d'entrée.
@@ -41,8 +42,10 @@ namespace DetectEncoding
                 {
                     if (objArgs.SilenceLevel < 2)
                     {
-                        Console.WriteLine(" No encoding found");
+                        Console.WriteLine(LangMgr.Instance["programNoEncodingFound"]);
                     }
+
+                    Environment.Exit(1);
                     return;
                 }
 
@@ -50,7 +53,7 @@ namespace DetectEncoding
                 EnumEol resultEol = DetectorsUtils.DetectEol(objArgs.InputFileName, inEncTransType);
                 if (objArgs.SilenceLevel < 2)
                 {
-                    Console.WriteLine(" Encoding: {0}; {1}", resultDEncodingInFile, resultEol.Libelle);
+                    Console.WriteLine(" Input : {0}; {1}", resultDEncodingInFile, resultEol.Libelle);
                 }
 
 
@@ -77,7 +80,7 @@ namespace DetectEncoding
 
                     if (objArgs.SilenceLevel < 2)
                     {
-                        Console.WriteLine(" Output : Encoding: {0}; {1}", outConf.OutputEncoding.Libelle,
+                        Console.WriteLine(" Output: {0}; {1}", outConf.OutputEncoding.Libelle,
                             outConf.OutputEol.Libelle);
                     }
 
@@ -91,7 +94,7 @@ namespace DetectEncoding
 # if DEBUG
                 //Console.ReadLine();
 # endif
-
+                Environment.Exit(0);
             }
             catch (CliParsingException e)
             {
@@ -111,7 +114,11 @@ namespace DetectEncoding
                 if (objArgs.SilenceLevel < 1)
                 {
                     argParser.ShowSyntax();
+                    Console.WriteLine();
+                    Console.WriteLine(LangMgr.Instance["programMoreHelpOn"]);
                 }
+
+                Environment.Exit(3);
 
             }
             catch (Exception e)
@@ -123,6 +130,7 @@ namespace DetectEncoding
                 Console.Write(e.Message);
                 
 # endif
+                Environment.Exit(4);
             }
 
         }
@@ -133,15 +141,14 @@ namespace DetectEncoding
 
             Console.WriteLine(" Encoding Detector - v{0}", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
             Console.WriteLine(" ===================================");
-            Console.WriteLine(" by Aryx - Wolfaryx informatique - 2018");
+            Console.WriteLine(LangMgr.Instance["programShowHeaderAuthor"] + " 2018");
             Console.WriteLine("");
-            Console.ResetColor();
 
-            Console.WriteLine(" Encoding detection based on work from AutoIt Consulting :");
+            Console.WriteLine(LangMgr.Instance["programShowHeaderDisc"]);
             Console.WriteLine(" https://github.com/AutoItConsulting/text-encoding-detect");
             Console.WriteLine("");
 
-            Console.ResetColor();
+
         }
 
 

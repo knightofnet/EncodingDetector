@@ -9,6 +9,8 @@ namespace DetectEncoding.utils
 {
     public static class MiscAppUtils
     {
+
+
         public static EnumAppEncoding FromTextEncoding(TextEncodingDetect.Encoding result)
         {
             if (TextEncodingDetect.Encoding.Ansi.Equals(result))
