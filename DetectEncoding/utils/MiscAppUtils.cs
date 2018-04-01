@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using AutoIt.Common;
 using DetectEncoding.constant;
 
@@ -9,7 +6,7 @@ namespace DetectEncoding.utils
 {
     public static class MiscAppUtils
     {
-
+        public delegate void Cdtl();
 
         public static EnumAppEncoding FromTextEncoding(TextEncodingDetect.Encoding result)
         {
@@ -51,5 +48,46 @@ namespace DetectEncoding.utils
             }
             return null;
         }
+
+        public static void ConditionnalExecCode(int batchSilenceLvl, int targetSilenceLevel, Cdtl delegat)
+        {
+            if (batchSilenceLvl < targetSilenceLevel)
+            {
+                delegat.Invoke();
+            }
+        }
+
+        public static void ConditionnalWrtLine(int batchSilenceLvl, int targetSilenceLevel)
+        {
+            if (batchSilenceLvl < targetSilenceLevel)
+            {
+                Console.WriteLine();
+            }
+        }
+
+        public static void ConditionnalWrtLine(int batchSilenceLvl, int targetSilenceLevel, string format)
+        {
+            if (batchSilenceLvl < targetSilenceLevel)
+            {
+                Console.WriteLine(format);
+            }
+        }
+
+        public static void ConditionnalWrtLine(int batchSilenceLvl, int targetSilenceLevel, string format, object arg0)
+        {
+            if (batchSilenceLvl < targetSilenceLevel)
+            {
+                Console.WriteLine(format, arg0);
+            }
+        }
+
+        public static void ConditionnalWrtLine(int batchSilenceLvl, int targetSilenceLevel, string format, object arg0, object arg1)
+        {
+            if (batchSilenceLvl < targetSilenceLevel)
+            {
+                Console.WriteLine(format, arg0, arg1);
+            }
+        }
+
     }
 }

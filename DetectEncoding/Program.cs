@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
-using AryxDevLibrary.utils;
 using AryxDevLibrary.utils.cliParser;
-using AutoIt.Common;
 using DetectEncoding.business;
 using DetectEncoding.business.parsing;
 using DetectEncoding.constant;
 using DetectEncoding.dto;
+using DetectEncoding.exception;
 using DetectEncoding.utils;
 
 namespace DetectEncoding
@@ -21,52 +18,175 @@ namespace DetectEncoding
         static void Main(string[] args)
         {
             ProgramParser argParser = new ProgramParser();
-            var l = LangMgr.Instance;
+            EnumExitCode batchExitCode;
+
             try
             {
+
                 // Lecture des options d'entrée.
                 ProgramArgs objArgs = argParser.ParseDirect(args);
 
-                if (objArgs.SilenceLevel < 1)
+                MiscAppUtils.ConditionnalExecCode(objArgs.SilenceLevel, 1, ShowHeaderApp);
+                MiscAppUtils.ConditionnalWrtLine(objArgs.SilenceLevel, 2, " InputFile: {0}", objArgs.InputFileName);
+
+                // Détection encodage
+                EnumAppEncoding inEncTransType;
+                EnumEol resultEol;
+                EnumExitCode exitCode = DetecteFileEncAndEol(out inEncTransType, out resultEol, objArgs);
+                if (exitCode != EnumExitCode.DETECT_OK)
                 {
-                    ShowHeaderApp();
+                    batchExitCode = exitCode;
                 }
 
+                OutputConf outConf = new OutputConf();
+                if (!objArgs.IsConvertMode)
+                {
+                    batchExitCode = EnumExitCode.DETECT_OK;
+                }
+                else
+                {
+
+                    // Réencodage
+                    outConf = new OutputConf
+                    {
+                        InputEncoding = inEncTransType
+                    };
+                    Reencode(objArgs, resultEol, outConf);
+                    batchExitCode = EnumExitCode.DETECT_AND_REENC_OK;
+
+                }
+
+                if (objArgs.OutputPattern != null)
+                {
+                    ShowPatternedOutput(objArgs, inEncTransType, resultEol, outConf, batchExitCode);
+                }
+
+# if DEBUG
+                Console.ReadLine();
+# endif
+                Environment.Exit(batchExitCode.ExitCode);
+            }
+            catch (CliParsingException e)
+            {
+                // --------------
+                // >> une erreur est survenue lors du parsing des options d'entrée du batch.
+                // --------------
+
+                ProgramArgs objArgs = argParser.EarlyParse(args);
+                MiscAppUtils.ConditionnalExecCode(objArgs.SilenceLevel, 1, ShowHeaderApp);
+
+# if DEBUG
+                Console.Write(e);
+# else
                 if (objArgs.SilenceLevel < 2)
                 {
-                    Console.WriteLine(" InputFile: {0}", objArgs.InputFileName);
+                    Console.Write(e.Message);
                 }
+# endif
+                MiscAppUtils.ConditionnalExecCode(objArgs.SilenceLevel, 1, delegate
+                {
+                    argParser.ShowSyntax();
+                    Console.WriteLine();
+                    Console.WriteLine(LangMgr.Instance["programMoreHelpOn"]);
+                });
+
+                Environment.Exit(EnumExitCode.ERROR_PARAM_IN.ExitCode);
+
+            }
+            catch (DetectEncodeException e)
+            {
+                // --------------
+                // >> une erreur est survenue lors de la datection de l'encodage.
+                // --------------
+# if DEBUG
+                Console.Write(e);
+                Console.ReadKey();
+# else
+
+                Console.Write(e.Message);
+
+# endif
+                Environment.Exit(EnumExitCode.ERROR_DETECT_ENC.ExitCode);
+
+            }
+            catch (ReencodePartException e)
+            {
+                // --------------
+                // >> une erreur est survenue lors du réencodage.
+                // --------------
+# if DEBUG
+                Console.Write(e);
+                Console.ReadKey();
+# else
+
+                Console.Write(e.Message);
+
+# endif
+                Environment.Exit(EnumExitCode.ERROR_REENC.ExitCode);
+
+            }
+            catch (Exception e)
+            {
+                // --------------
+                // >> une erreur non prévue est survenue.
+                // --------------
+
+# if DEBUG
+                Console.Write(e);
+                Console.ReadKey();
+# else
+
+                Console.Write(e.Message);
+
+# endif
+                Environment.Exit(EnumExitCode.ERROR_PARAM_IN.ExitCode);
+            }
+
+        }
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eAppEncoding"></param>
+        /// <param name="eEol"></param>
+        /// <param name="objArgs"></param>
+        /// <returns></returns>
+        private static EnumExitCode DetecteFileEncAndEol(out EnumAppEncoding eAppEncoding, out EnumEol eEol, ProgramArgs objArgs)
+        {
+            try
+            {
 
                 var resultDEncodingInFile = DetectorsUtils.DetectEncoding(objArgs.InputFileName);
-                if (resultDEncodingInFile == TextEncodingDetect.Encoding.None)
-                {
-                    if (objArgs.SilenceLevel < 2)
-                    {
-                        Console.WriteLine(LangMgr.Instance["programNoEncodingFound"]);
-                    }
 
-                    Environment.Exit(1);
-                    return;
-                }
-
-                EnumAppEncoding inEncTransType = MiscAppUtils.FromTextEncoding(resultDEncodingInFile);
-                EnumEol resultEol = DetectorsUtils.DetectEol(objArgs.InputFileName, inEncTransType);
-                if (objArgs.SilenceLevel < 2)
-                {
-                    Console.WriteLine(" Input : {0}; {1}", resultDEncodingInFile, resultEol.Libelle);
-                }
+                eAppEncoding = MiscAppUtils.FromTextEncoding(resultDEncodingInFile);
+                eEol = DetectorsUtils.DetectEol(objArgs.InputFileName, eAppEncoding);
+                MiscAppUtils.ConditionnalWrtLine(objArgs.SilenceLevel, 2, " Input : {0}; {1}", eAppEncoding == null ? "NONE" : eAppEncoding.Libelle,
+                    eEol.Libelle);
 
 
-                OutputConf outConf = new OutputConf
-                {
-                    InputEncoding = inEncTransType
-                };
+                if (eAppEncoding != null) return EnumExitCode.DETECT_OK;
 
-                if (!objArgs.IsConvertMode || inEncTransType == null)
-                {
-                    return;
-                }
+                MiscAppUtils.ConditionnalWrtLine(objArgs.SilenceLevel, 2, LangMgr.Instance["programNoEncodingFound"]);
+                return EnumExitCode.NO_ENC_FOUND;
+            }
+            catch (Exception e)
+            {
+                throw new DetectEncodeException("Erreur lors de la détection de l'encodage", e);
+            }
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objArgs"></param>
+        /// <param name="resultEol"></param>
+        /// <param name="outConf"></param>
+        private static void Reencode(ProgramArgs objArgs, EnumEol resultEol, OutputConf outConf)
+        {
+            try
+            {
 
                 outConf.OutputEncoding = objArgs.OutputEncoding;
                 outConf.OutputFileName = objArgs.OutputFileName;
@@ -77,69 +197,26 @@ namespace DetectEncoding
                 {
                     outConf.InputEol = resultEol;
                     SetDefaultValueForConverter(objArgs.InputFileName, outConf);
-
-                    if (objArgs.SilenceLevel < 2)
-                    {
-                        Console.WriteLine(" Output: {0}; {1}", outConf.OutputEncoding.Libelle,
-                            outConf.OutputEol.Libelle);
-                    }
-
+                    MiscAppUtils.ConditionnalWrtLine(objArgs.SilenceLevel, 2, " Output: {0}; {1}",
+                        outConf.OutputEncoding.Libelle,
+                        outConf.OutputEol.Libelle);
 
 
                     OutputFileWriter ofwWriter = new OutputFileWriter(objArgs.InputFileName, outConf);
                     ofwWriter.ToFile();
-
                 }
-
-# if DEBUG
-                //Console.ReadLine();
-# endif
-                Environment.Exit(0);
             }
-            catch (CliParsingException e)
+            catch (Exception ex)
             {
-
-                ProgramArgs objArgs = argParser.EarlyParse(args);
-                if (objArgs.SilenceLevel < 1)
-                {
-                    ShowHeaderApp();
-                }
-# if DEBUG
-                Console.Write(e);
-# else
-                if (objArgs.SilenceLevel < 2) {
-                    Console.Write(e.Message);
-                }
-# endif
-                if (objArgs.SilenceLevel < 1)
-                {
-                    argParser.ShowSyntax();
-                    Console.WriteLine();
-                    Console.WriteLine(LangMgr.Instance["programMoreHelpOn"]);
-                }
-
-                Environment.Exit(3);
-
+                throw new ReencodePartException("Erreur lors du ré-encodage", ex);
             }
-            catch (Exception e)
-            {
-# if DEBUG
-                Console.Write(e);
-# else
-
-                Console.Write(e.Message);
-                
-# endif
-                Environment.Exit(4);
-            }
-
         }
 
         private static void ShowHeaderApp()
         {
             Console.ForegroundColor = ConsoleColor.White;
 
-            Console.WriteLine(" Encoding Detector - v{0}", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
+            Console.WriteLine(" Encoding Detector - v{0}", Assembly.GetExecutingAssembly().GetName().Version);
             Console.WriteLine(" ===================================");
             Console.WriteLine(LangMgr.Instance["programShowHeaderAuthor"] + " 2018");
             Console.WriteLine("");
@@ -170,6 +247,36 @@ namespace DetectEncoding
                 FileInfo fI = new FileInfo(inputFileName);
                 outConf.OutputFileName = fI.Name.Replace(fI.Extension, "") + "-Out" + fI.Extension;
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="batchArgs"></param>
+        /// <param name="resultInputEncoding"></param>
+        /// <param name="resultInputEol"></param>
+        /// <param name="outputConfObj"></param>
+        /// <param name="exitCode"></param>
+        private static void ShowPatternedOutput(ProgramArgs batchArgs, EnumAppEncoding resultInputEncoding, EnumEol resultInputEol, OutputConf outputConfObj, EnumExitCode exitCode)
+        {
+            StringBuilder str = new StringBuilder(batchArgs.OutputPattern);
+            str.Replace("[IN_FILE]", batchArgs.InputFileName);
+            str.Replace("[IN_ENC]", resultInputEncoding.Libelle);
+            str.Replace("[IN_EOL]", resultInputEol.Libelle);
+
+            str.Replace("[OUT_ENC]", outputConfObj.OutputEncoding != null ? outputConfObj.OutputEncoding.Libelle : "");
+            str.Replace("[OUT_EOL]", outputConfObj.OutputEol != null ? outputConfObj.OutputEol.Libelle : "");
+            str.Replace("[OUT_FILE]", outputConfObj.OutputFileName ?? "");
+
+            str.Replace("[WITH_REENC]", batchArgs.IsConvertMode ? "true" : "false");
+            str.Replace("[EXIT_CODE]", exitCode.ExitCode.ToString());
+            str.Replace("[EXIT_CODE_LBL]", exitCode.Libelle);
+
+            str.Replace("[APP_VERSION]", Assembly.GetExecutingAssembly().GetName().Version.ToString());
+
+            Console.WriteLine(str.ToString());
+
+
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using AryxDevLibrary.utils;
 
 namespace DetectEncoding.constant
@@ -53,11 +52,7 @@ namespace DetectEncoding.constant
                 return null;
             }
 
-            foreach (var value in Values)
-            {
-                if (encodingInput.Equals(value.Libelle)) return value;
-            }
-            return null;
+            return Values.FirstOrDefault(value => encodingInput.Equals(value.Libelle));
         }
     }
 }

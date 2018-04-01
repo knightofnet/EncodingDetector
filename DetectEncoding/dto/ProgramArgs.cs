@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DetectEncoding.constant;
+﻿using DetectEncoding.constant;
 
 namespace DetectEncoding.dto
 {
@@ -19,6 +15,6 @@ namespace DetectEncoding.dto
 
         public string OutputFileName { get; set; }
         public int SilenceLevel { get; set; }
-
+        public string OutputPattern { get; set; }
     }
 }

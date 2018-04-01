@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using AutoIt.Common;
 using DetectEncoding.constant;
 
@@ -26,7 +24,7 @@ namespace DetectEncoding.utils
         {
             EnumEol enumRet = EnumEol.NONE;
 
-
+            int[] tabInt = new int[500];
 
             using (StreamReader sr = StreamUtils.GetStreamReaderFromEAppEncoding(filename, inEncoding))
             {
@@ -41,7 +39,7 @@ namespace DetectEncoding.utils
                 int positionN = 0;
 
 
-
+                int i = 0;
                 while (sr.Peek() >= 0)
                 {
                     positionN++;
@@ -52,11 +50,15 @@ namespace DetectEncoding.utils
                     }
                     charAtN = sr.Read();
 
+
+                    tabInt[i++] = charAtN;
+
                     // Il faut au minimum 2 caractères pour déterminer le EOL
                     if (positionN <= 1) continue;
 
                     if (charAtN == 10 && charAtN1 == 13)
                     {
+                        //Console.WriteLine(string.Join(" ", tabInt));
                         enumRet = EnumEol.DOS;
                     }
                     else if (charAtN1 == 10)
@@ -75,6 +77,9 @@ namespace DetectEncoding.utils
                 }
 
             }
+
+            //Console.WriteLine(string.Join(" ", tabInt));
+
 
             return enumRet;
         }

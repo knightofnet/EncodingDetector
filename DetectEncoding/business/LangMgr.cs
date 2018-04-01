@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Reflection;
 using System.Resources;
-using System.Security.AccessControl;
-using System.Text;
 using DetectEncoding.constant.texts;
 
 namespace DetectEncoding.business

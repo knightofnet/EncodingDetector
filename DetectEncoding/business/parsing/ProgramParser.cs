@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using AryxDevLibrary.utils;
 using AryxDevLibrary.utils.cliParser;
 using DetectEncoding.constant;
@@ -66,6 +62,15 @@ namespace DetectEncoding.business.parsing
             Name = "SilenceLevel"
         };
 
+        private readonly Option _optionPatternedOutput = new Option()
+        {
+            ShortOpt = "p",
+            LongOpt = "output-pattern",
+            Description = LangMgr.Instance["parserPatternedOutputDesc"],
+            HasArgs = true,
+            IsMandatory = false,
+            Name = "PatternedOutput"
+        };
 
 
         public ProgramParser()
@@ -75,6 +80,7 @@ namespace DetectEncoding.business.parsing
             AddOption(_optionTargetEol);
             AddOption(_optionOutputFile);
             AddOption(_optionSilenceLevel);
+            AddOption(_optionPatternedOutput);
         }
 
 
@@ -128,6 +134,7 @@ namespace DetectEncoding.business.parsing
             ProgramArgs p = new ProgramArgs();
             p.OutputEol = EnumEol.NONE;
 
+            // Input File path
             string fileUrl = GetSingleOptionValue(_optionFile.Name, arg);
             string fullPath = Path.GetFullPath(fileUrl);
             if (!File.Exists(fullPath))
@@ -136,6 +143,7 @@ namespace DetectEncoding.business.parsing
             }
             p.InputFileName = fullPath;
 
+            // Silence Level
             string silenceLevelRaw = GetSingleOptionValue(_optionSilenceLevel.Name, arg);
             if (!StringUtils.IsEmpty(silenceLevelRaw))
             {
@@ -155,12 +163,14 @@ namespace DetectEncoding.business.parsing
                 p.SilenceLevel = 0;
             }
 
+
             if (HasOption(_optionTargetEol.Name, arg) || HasOption(_optionTargetEnc.Name, arg) ||
                 HasOption(_optionOutputFile.Name, arg))
             {
                 p.IsConvertMode = true;
             }
 
+            // Target EOL
             if (HasOption(_optionTargetEol.Name, arg))
             {
                 string eolInput = GetSingleOptionValue(_optionTargetEol.Name, arg).ToUpper();
@@ -175,6 +185,7 @@ namespace DetectEncoding.business.parsing
                 p.OutputEol = enEolIn;
             }
 
+            // Target Enc
             if (HasOption(_optionTargetEnc.Name, arg))
             {
                 string encodingInput = GetSingleOptionValue(_optionTargetEnc.Name, arg).ToUpper();
@@ -203,6 +214,7 @@ namespace DetectEncoding.business.parsing
                 }
             }
 
+            // OutputFileName
             if (HasOption(_optionOutputFile.Name, arg))
             {
 
@@ -212,6 +224,16 @@ namespace DetectEncoding.business.parsing
                     outputFile = p.InputFileName;
                 }
                 p.OutputFileName = outputFile;
+            }
+
+
+            // PatternedOutput
+            if (HasOption(_optionPatternedOutput, arg))
+            {
+
+                p.OutputPattern = GetSingleOptionValue(_optionPatternedOutput, arg);
+                p.SilenceLevel = 99;
+
             }
 
 

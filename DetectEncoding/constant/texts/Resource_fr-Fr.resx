@@ -141,6 +141,9 @@
   <data name="parserParseTrtSilenceLvlWrontTxt" xml:space="preserve">
     <value>L'option -s doit être un entier de 0 à 2. '{0}' fournit.</value>
   </data>
+  <data name="parserPatternedOutputDesc" xml:space="preserve">
+    <value>Indique un modèle pour l'affichage des traitements. Ex: [I_ENC] pour afficher l'encodage du fichier en entré. N'affiche pas la sortie classique</value>
+  </data>
   <data name="programMoreHelpOn" xml:space="preserve">
     <value> Plus d'aide sur http://wolfaryx.fr</value>
   </data>
