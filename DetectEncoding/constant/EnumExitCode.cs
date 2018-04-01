@@ -15,6 +15,9 @@ namespace DetectEncoding.constant
         public static readonly EnumExitCode ERROR_DETECT_ENC = new EnumExitCode("ERROR_DETECT_ENC", 51);
         public static readonly EnumExitCode ERROR_REENC = new EnumExitCode("ERROR_REENC", 52);
 
+        public static readonly EnumExitCode ERROR_UNEXPECTED = new EnumExitCode("ERROR_UNEXPECTED", 99);
+
+
 
 
         public static IEnumerable<EnumExitCode> Values
@@ -27,6 +30,7 @@ namespace DetectEncoding.constant
                 yield return ERROR_PARAM_IN;
                 yield return ERROR_DETECT_ENC;
                 yield return ERROR_REENC;
+                yield return ERROR_UNEXPECTED;
 
             }
         }

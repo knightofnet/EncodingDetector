@@ -139,7 +139,7 @@ namespace DetectEncoding
                 Console.Write(e.Message);
 
 # endif
-                Environment.Exit(EnumExitCode.ERROR_PARAM_IN.ExitCode);
+                Environment.Exit(EnumExitCode.ERROR_UNEXPECTED.ExitCode);
             }
 
         }
