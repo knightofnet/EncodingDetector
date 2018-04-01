@@ -81,7 +81,7 @@ Permet de régler le nombre d'éléments affichés dans la console. Selon 3 nive
 
 **Description :** 
 
-Permet d'effectuer un formattage personnalisé sur la sortie, c'est-à-dire sur ce que le programme renvoi.
+Permet d'effectuer un formatage personnalisé sur la sortie, c'est-à-dire sur ce que le programme renvoi.
 
 La chaine de sortie est personnalisable. Les variables de modèle ci-dessous seront substituées :
 
@@ -89,9 +89,9 @@ La chaine de sortie est personnalisable. Les variables de modèle ci-dessous ser
 * [IN_FILE] : Le chemin du fichier passé en entrée du programme.
 * [IN_ENC] : L'encodage du fichier en entré détecté.
 * [IN_EOL] : Le type de caractère de fin de ligne détecté.
-* [OUT_ENC] : L'encodage demandé du fichier en sorti. Si aucune conversion n'est effectuée, cette variable sera subsituée par une chaine vide.
-* [OUT_EOL] : Le type de caractère de fin de ligne demandé pour le fichier en sorti. Si aucune conversion n'est effectuée, cette variable sera subsituée par une chaine vide.
-* [OUT_FILE] : Le chemin du fichier en sorti. Si aucune conversion n'est effectuée, cette variable sera subsituée par une chaine vide.
+* [OUT_ENC] : L'encodage demandé du fichier en sorti. Si aucune conversion n'est effectuée, cette variable sera substituée par une chaine vide.
+* [OUT_EOL] : Le type de caractère de fin de ligne demandé pour le fichier en sorti. Si aucune conversion n'est effectuée, cette variable sera substituée par une chaine vide.
+* [OUT_FILE] : Le chemin du fichier en sorti. Si aucune conversion n'est effectuée, cette variable sera substituée par une chaine vide.
 * [WITH_REENC] : indique si une conversion a eu lieu. true ou false.
 * [EXIT_CODE] : le code de sortie du programme.
 * [EXIT_CODE_LBL] : le libellé du sortie du programme.
