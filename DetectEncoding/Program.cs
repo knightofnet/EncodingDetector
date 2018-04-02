@@ -63,6 +63,8 @@ namespace DetectEncoding
 
 # if DEBUG
                 Console.ReadLine();
+# else
+                MiscAppUtils.ConditionnalWrtLine(objArgs.SilenceLevel, 1, "");
 # endif
                 Environment.Exit(batchExitCode.ExitCode);
             }
@@ -78,16 +80,15 @@ namespace DetectEncoding
 # if DEBUG
                 Console.Write(e);
 # else
-                if (objArgs.SilenceLevel < 2)
-                {
-                    Console.Write(e.Message);
-                }
+                MiscAppUtils.ConditionnalWrtLine(objArgs.SilenceLevel, 2, e.Message);
+
 # endif
                 MiscAppUtils.ConditionnalExecCode(objArgs.SilenceLevel, 1, delegate
                 {
                     argParser.ShowSyntax();
                     Console.WriteLine();
                     Console.WriteLine(LangMgr.Instance["programMoreHelpOn"]);
+                    Console.WriteLine();
                 });
 
                 Environment.Exit(EnumExitCode.ERROR_PARAM_IN.ExitCode);
@@ -215,7 +216,7 @@ namespace DetectEncoding
         private static void ShowHeaderApp()
         {
             Console.ForegroundColor = ConsoleColor.White;
-
+            Console.WriteLine("");
             Console.WriteLine(" Encoding Detector - v{0}", Assembly.GetExecutingAssembly().GetName().Version);
             Console.WriteLine(" ===================================");
             Console.WriteLine(LangMgr.Instance["programShowHeaderAuthor"] + " 2018");
@@ -225,6 +226,7 @@ namespace DetectEncoding
             Console.WriteLine(" https://github.com/AutoItConsulting/text-encoding-detect");
             Console.WriteLine("");
 
+            Console.ResetColor();
 
         }
 

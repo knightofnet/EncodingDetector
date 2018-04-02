@@ -134,6 +134,12 @@ namespace DetectEncoding.business.parsing
             ProgramArgs p = new ProgramArgs();
             p.OutputEol = EnumEol.NONE;
 
+            // Silence level and output-pattern sont mutuellement exclusive
+            if (HasOption(_optionSilenceLevel, arg) && HasOption(_optionPatternedOutput, arg))
+            {
+                throw new CliParsingException(String.Format(LangMgr.Instance["parserParseErrorSandPin"], _optionSilenceLevel.ShortOpt, _optionPatternedOutput.ShortOpt));
+            }
+
             // Input File path
             string fileUrl = GetSingleOptionValue(_optionFile.Name, arg);
             string fullPath = Path.GetFullPath(fileUrl);

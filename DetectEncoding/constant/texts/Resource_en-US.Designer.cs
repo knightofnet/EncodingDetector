@@ -8,16 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.CodeDom.Compiler;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.Resources;
-using System.Runtime.CompilerServices;
-
-namespace DetectEncoding.constant.texts
-{
+namespace DetectEncoding.constant.texts {
+    using System;
+    
+    
     /// <summary>
     ///   Une classe de ressource fortement typée destinée, entre autres, à la consultation des chaînes localisées.
     /// </summary>
@@ -25,194 +19,169 @@ namespace DetectEncoding.constant.texts
     // à l'aide d'un outil, tel que ResGen ou Visual Studio.
     // Pour ajouter ou supprimer un membre, modifiez votre fichier .ResX, puis réexécutez ResGen
     // avec l'option /str ou régénérez votre projet VS.
-    [GeneratedCode("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
-    [DebuggerNonUserCode()]
-    [CompilerGenerated()]
-    internal class Resource_en_US
-    {
-
-        private static ResourceManager resourceMan;
-
-        private static CultureInfo resourceCulture;
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resource_en_US()
-        {
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    internal class Resource_en_US {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resource_en_US() {
         }
-
+        
         /// <summary>
         ///   Retourne l'instance ResourceManager mise en cache utilisée par cette classe.
         /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Advanced)]
-        internal static ResourceManager ResourceManager
-        {
-            get
-            {
-                if (ReferenceEquals(resourceMan, null))
-                {
-                    ResourceManager temp = new ResourceManager("DetectEncoding.constant.texts.Resource_en-US", typeof(Resource_en_US).Assembly);
+        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DetectEncoding.constant.texts.Resource_en-US", typeof(Resource_en_US).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Remplace la propriété CurrentUICulture du thread actuel pour toutes
         ///   les recherches de ressources à l'aide de cette classe de ressource fortement typée.
         /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Advanced)]
-        internal static CultureInfo Culture
-        {
-            get
-            {
+        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
                 return resourceCulture;
             }
-            set
-            {
+            set {
                 resourceCulture = value;
             }
         }
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Path of file to analyze.
         /// </summary>
-        internal static string parserOptFileDesc
-        {
-            get
-            {
+        internal static string parserOptFileDesc {
+            get {
                 return ResourceManager.GetString("parserOptFileDesc", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Target file for conversion. If omitted, the file will look like [Input file name]-Out[Input file extension]. If equal to &quot;SAME_AS_INPUT&quot; then same file as -f option.
         /// </summary>
-        internal static string parserOptOutputFileDesc
-        {
-            get
-            {
+        internal static string parserOptOutputFileDesc {
+            get {
                 return ResourceManager.GetString("parserOptOutputFileDesc", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Adjusts the number of items displayed. 0: everything is displayed (as if -s absent), 1: just processing lines, 2: nothing is displayed.
         /// </summary>
-        internal static string parserOptSilenceLevelDesc
-        {
-            get
-            {
+        internal static string parserOptSilenceLevelDesc {
+            get {
                 return ResourceManager.GetString("parserOptSilenceLevelDesc", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Converts the encoding of the analyzed file into a target encoding: {0}. Conversion is only possible if the source encoding has been detected..
         /// </summary>
-        internal static string parserOptTargetEncDesc
-        {
-            get
-            {
+        internal static string parserOptTargetEncDesc {
+            get {
                 return ResourceManager.GetString("parserOptTargetEncDesc", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Converts the end of line character : {0}. Conversion is only possible if the source encoding has been detected..
         /// </summary>
-        internal static string parserOptTargetEolDesc
-        {
-            get
-            {
+        internal static string parserOptTargetEolDesc {
+            get {
                 return ResourceManager.GetString("parserOptTargetEolDesc", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error in the input options of the program. Options -{0} and -{1} cannot be used at the same time..
+        /// </summary>
+        internal static string parserParseErrorSandPin {
+            get {
+                return ResourceManager.GetString("parserParseErrorSandPin", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à The end of line character &apos;{0}&apos; does not exist. Type of possible: {1}.
         /// </summary>
-        internal static string parserParseTrtEolNotExistTxt
-        {
-            get
-            {
+        internal static string parserParseTrtEolNotExistTxt {
+            get {
                 return ResourceManager.GetString("parserParseTrtEolNotExistTxt", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à The file {0} does not exist.
         /// </summary>
-        internal static string parserParseTrtFileNotFoundTxt
-        {
-            get
-            {
+        internal static string parserParseTrtFileNotFoundTxt {
+            get {
                 return ResourceManager.GetString("parserParseTrtFileNotFoundTxt", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à The -s option must be an integer from 0 to 2. &apos;{0}&apos; provides..
         /// </summary>
-        internal static string parserParseTrtSilenceLvlWrontTxt
-        {
-            get
-            {
+        internal static string parserParseTrtSilenceLvlWrontTxt {
+            get {
                 return ResourceManager.GetString("parserParseTrtSilenceLvlWrontTxt", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Indicates a template for displaying treatments. Ex: [I_ENC] to display the encoding of the input file. Disable original standard output.
         /// </summary>
-        internal static string parserPatternedOutputDesc
-        {
-            get
-            {
+        internal static string parserPatternedOutputDesc {
+            get {
                 return ResourceManager.GetString("parserPatternedOutputDesc", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à  More help on http://wolfaryx.fr.
         /// </summary>
-        internal static string programMoreHelpOn
-        {
-            get
-            {
+        internal static string programMoreHelpOn {
+            get {
                 return ResourceManager.GetString("programMoreHelpOn", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à  No encoding found.
         /// </summary>
-        internal static string programNoEncodingFound
-        {
-            get
-            {
+        internal static string programNoEncodingFound {
+            get {
                 return ResourceManager.GetString("programNoEncodingFound", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à  by Aryx - Wolfaryx informatique -.
         /// </summary>
-        internal static string programShowHeaderAuthor
-        {
-            get
-            {
+        internal static string programShowHeaderAuthor {
+            get {
                 return ResourceManager.GetString("programShowHeaderAuthor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à  Encoding detection based on AutoIt Consulting work:.
         /// </summary>
-        internal static string programShowHeaderDisc
-        {
-            get
-            {
+        internal static string programShowHeaderDisc {
+            get {
                 return ResourceManager.GetString("programShowHeaderDisc", resourceCulture);
             }
         }

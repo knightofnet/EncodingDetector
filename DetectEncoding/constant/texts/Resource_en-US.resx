@@ -132,6 +132,9 @@
   <data name="parserOptTargetEolDesc" xml:space="preserve">
     <value>Converts the end of line character : {0}. Conversion is only possible if the source encoding has been detected.</value>
   </data>
+  <data name="parserParseErrorSandPin" xml:space="preserve">
+    <value>Error in the input options of the program. Options -{0} and -{1} cannot be used at the same time.</value>
+  </data>
   <data name="parserParseTrtEolNotExistTxt" xml:space="preserve">
     <value>The end of line character '{0}' does not exist. Type of possible: {1}</value>
   </data>
