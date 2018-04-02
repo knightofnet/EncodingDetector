@@ -96,6 +96,10 @@ La chaine de sortie est personnalisable. Les variables de modèle ci-dessous ser
 * [EXIT_CODE] : le code de sortie du programme.
 * [EXIT_CODE_LBL] : le libellé du sortie du programme.
 
+**Remarque :**
+
+Les options -s et -p sont mutuellement exclusives. Elles ne peuvent pas être utilisée en même temps.
+
 ## Conversion
 
 La conversion de l'encodage et du caractère de fin de ligne ne s'effectue que lorsque l'encodage du fichier à traiter à réussi. Si pour une raison ou une autre l'encodage du fichier source n'est pas détecté, la conversion ne sera pas effectuée.
