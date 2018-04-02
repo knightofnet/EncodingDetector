@@ -110,7 +110,7 @@ Si l'option "o" n'est pas indiqué, le fichier converti sera sous la forme :
 NomDuFichierSource-Out.ExtensionDuFichierSource
 ```
 
-## Code de sorti (exitCode)
+## Code de sortie / code d'état (exitCode)
 
 Le résultat des traitements effectués par le programme est notifié via son code de sorti.
 
