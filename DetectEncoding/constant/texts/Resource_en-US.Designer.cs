@@ -151,7 +151,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à  More help on http://wolfaryx.fr.
+        ///   Recherche une chaîne localisée semblable à  More help on http://wolfaryx.fr/?p=3041.
         /// </summary>
         internal static string programMoreHelpOn {
             get {

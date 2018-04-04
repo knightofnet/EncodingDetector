@@ -151,7 +151,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à  Plus d&apos;aide sur http://wolfaryx.fr.
+        ///   Recherche une chaîne localisée semblable à  Plus d&apos;aide sur http://wolfaryx.fr/?p=3041.
         /// </summary>
         internal static string programMoreHelpOn {
             get {
@@ -178,7 +178,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à  Détection de l&apos;encodage basé sur les travaux de AutoIt Consulting :.
+        ///   Recherche une chaîne localisée semblable à  Détection de l&apos;encodage basée sur les travaux de AutoIt Consulting :.
         /// </summary>
         internal static string programShowHeaderDisc {
             get {

@@ -148,7 +148,7 @@
     <value>Indique un modèle pour l'affichage des traitements. Ex: [I_ENC] pour afficher l'encodage du fichier en entré. N'affiche pas la sortie classique</value>
   </data>
   <data name="programMoreHelpOn" xml:space="preserve">
-    <value> Plus d'aide sur http://wolfaryx.fr</value>
+    <value> Plus d'aide sur http://wolfaryx.fr/?p=3041</value>
   </data>
   <data name="programNoEncodingFound" xml:space="preserve">
     <value> Aucun encodage détecté</value>
@@ -157,6 +157,6 @@
     <value> par Aryx - WolfAryx informatique -</value>
   </data>
   <data name="programShowHeaderDisc" xml:space="preserve">
-    <value> Détection de l'encodage basé sur les travaux de AutoIt Consulting :</value>
+    <value> Détection de l'encodage basée sur les travaux de AutoIt Consulting :</value>
   </data>
 </root>
