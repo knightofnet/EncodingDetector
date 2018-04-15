@@ -3,10 +3,12 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using AryxDevLibrary.extensions;
 using AryxDevLibrary.utils.cliParser;
 using DetectEncoding.business;
 using DetectEncoding.business.parsing;
 using DetectEncoding.constant;
+using DetectEncoding.constant.texts;
 using DetectEncoding.dto;
 using DetectEncoding.exception;
 using DetectEncoding.utils;
@@ -17,6 +19,11 @@ namespace DetectEncoding
     {
         static void Main(string[] args)
         {
+            LangMgr.AddResourceManager("fr", Resource_fr_Fr.ResourceManager);
+            LangMgr.AddResourceManager("en", Resource_en_US.ResourceManager);
+            //LangMgr.ForceCulture("fr");
+            TranslateCliParser();
+
             ProgramParser argParser = new ProgramParser();
             EnumExitCode batchExitCode;
 
@@ -278,6 +285,32 @@ namespace DetectEncoding
 
             Console.WriteLine(str.ToString());
 
+
+        }
+
+        private static void TranslateCliParser()
+        {
+
+            String langKey = "cliparserAlsoStr";
+            if (!LangMgr.Instance[langKey].IsEmpty())
+                CliParserLangRef.CwWriteLines_Also = LangMgr.Instance[langKey];
+
+            langKey = "cliparserRequiredStr";
+            if (!LangMgr.Instance[langKey].IsEmpty())
+                CliParserLangRef.CwWriteLines_Required = LangMgr.Instance[langKey];
+
+            langKey = "cliparserSyntaxTplStr";
+            if (!LangMgr.Instance[langKey].IsEmpty())
+                CliParserLangRef.ShowSyntax_SyntaxTpl = LangMgr.Instance[langKey];
+
+            langKey = "cliparserOptMissingStr";
+            if (!LangMgr.Instance[langKey].IsEmpty())
+                CliParserLangRef.CheckOption_OptionNotPresent = LangMgr.Instance[langKey];
+
+
+            langKey = "cliparserOptArgMissingStr";
+            if (!LangMgr.Instance[langKey].IsEmpty())
+                CliParserLangRef.CheckOption_OptionMustHaveArg = LangMgr.Instance[langKey];
 
         }
     }

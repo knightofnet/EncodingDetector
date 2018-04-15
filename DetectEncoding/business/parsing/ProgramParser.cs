@@ -75,13 +75,10 @@ namespace DetectEncoding.business.parsing
 
         public ProgramParser()
         {
-            AddOption(_optionFile);
-            AddOption(_optionTargetEnc);
-            AddOption(_optionTargetEol);
-            AddOption(_optionOutputFile);
-            AddOption(_optionSilenceLevel);
-            AddOption(_optionPatternedOutput);
+            AddDefaultOptions();
         }
+
+
 
 
         public override ProgramArgs ParseDirect(string[] args)
@@ -118,15 +115,21 @@ namespace DetectEncoding.business.parsing
             });
 
             ClearOptions();
+            AddDefaultOptions();
+
+            return pargs;
+
+
+        }
+
+        private void AddDefaultOptions()
+        {
             AddOption(_optionFile);
             AddOption(_optionTargetEnc);
             AddOption(_optionTargetEol);
             AddOption(_optionOutputFile);
             AddOption(_optionSilenceLevel);
-
-            return pargs;
-
-
+            AddOption(_optionPatternedOutput);
         }
 
         private ProgramArgs ParseTrt(Dictionary<string, Option> arg)

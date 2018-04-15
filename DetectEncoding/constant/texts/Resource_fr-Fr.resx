@@ -117,6 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="cliparserAlsoStr" xml:space="preserve">
+    <value>aussi</value>
+  </data>
+  <data name="cliparserOptArgMissingStr" xml:space="preserve">
+    <value>L'option -{0} doit être utilisée avec un argument.</value>
+  </data>
+  <data name="cliparserOptMissingStr" xml:space="preserve">
+    <value>L'option -{0} absente alors qu'elle est obligatoire.</value>
+  </data>
+  <data name="cliparserRequiredStr" xml:space="preserve">
+    <value>Obligatoire. </value>
+  </data>
+  <data name="cliparserSyntaxTplStr" xml:space="preserve">
+    <value>  Syntaxe : {0} OPTIONS</value>
+  </data>
   <data name="parserOptFileDesc" xml:space="preserve">
     <value>Chemin du fichier à analyser</value>
   </data>

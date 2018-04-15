@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Resources;
-using DetectEncoding.constant.texts;
+
 
 namespace DetectEncoding.business
 {
@@ -9,11 +10,49 @@ namespace DetectEncoding.business
     {
         private static LangMgr _instance;
 
+        private static readonly Dictionary<String, ResourceManager> _resourceManagerByCulture =
+            new Dictionary<string, ResourceManager>(1);
+
+        private static string _dftCulture;
+
+        public static void AddResourceManager(String cultureTwoLetterRm, ResourceManager resourceManager)
+        {
+            _resourceManagerByCulture.Add(cultureTwoLetterRm, resourceManager);
+
+        }
+
+        public static void ForceCulture(string twoLetterCulture)
+        {
+            if (_resourceManagerByCulture.ContainsKey(twoLetterCulture))
+            {
+                _dftCulture = twoLetterCulture;
+            }
+            else
+            {
+                throw new Exception("There is no culture with two letter '" + twoLetterCulture + " that is set");
+            }
+        }
+
         public static LangMgr Instance
         {
-            get { return _instance ?? (_instance = new LangMgr(CultureInfo.CurrentCulture.TwoLetterISOLanguageName)); }
+            get { return GetInstance(); }
             private set { _instance = value; }
         }
+
+        private static LangMgr GetInstance()
+        {
+            if (_instance == null)
+            {
+                if (_resourceManagerByCulture.Count == 0)
+                {
+                    throw new Exception("LangMgr has no ResourceManager set");
+                }
+
+                _instance = new LangMgr(_dftCulture ?? CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            }
+            return _instance;
+        }
+
 
         public String LangangeTwoLetter { get; private set; }
 
@@ -31,22 +70,12 @@ namespace DetectEncoding.business
         {
             LangangeTwoLetter = culture;
 
-            if (culture.Equals("fr"))
+            if (_resourceManagerByCulture.ContainsKey(culture))
             {
-                _currentManager = Resource_fr_Fr.ResourceManager;
+                _currentManager = _resourceManagerByCulture[culture];
             }
-            else if (culture.Equals("en"))
-            {
-                _currentManager = Resource_en_US.ResourceManager;
-            }
-            else
-            {
-                _currentManager = Resource_en_US.ResourceManager;
-            }
+
 
         }
-
-
-
     }
 }

@@ -61,6 +61,51 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à aussi.
+        /// </summary>
+        internal static string cliparserAlsoStr {
+            get {
+                return ResourceManager.GetString("cliparserAlsoStr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à L&apos;option -{0} doit être utilisée avec un argument..
+        /// </summary>
+        internal static string cliparserOptArgMissingStr {
+            get {
+                return ResourceManager.GetString("cliparserOptArgMissingStr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à L&apos;option -{0} absente alors qu&apos;elle est obligatoire..
+        /// </summary>
+        internal static string cliparserOptMissingStr {
+            get {
+                return ResourceManager.GetString("cliparserOptMissingStr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Obligatoire. .
+        /// </summary>
+        internal static string cliparserRequiredStr {
+            get {
+                return ResourceManager.GetString("cliparserRequiredStr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à   Syntaxe : {0} OPTIONS.
+        /// </summary>
+        internal static string cliparserSyntaxTplStr {
+            get {
+                return ResourceManager.GetString("cliparserSyntaxTplStr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Chemin du fichier à analyser.
         /// </summary>
         internal static string parserOptFileDesc {
