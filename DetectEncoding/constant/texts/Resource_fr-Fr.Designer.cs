@@ -79,7 +79,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à L&apos;option -{0} absente alors qu&apos;elle est obligatoire..
+        ///   Recherche une chaîne localisée semblable à L&apos;option -{0} est absente alors qu&apos;elle est obligatoire..
         /// </summary>
         internal static string cliparserOptMissingStr {
             get {
@@ -102,6 +102,15 @@ namespace DetectEncoding.constant.texts {
         internal static string cliparserSyntaxTplStr {
             get {
                 return ResourceManager.GetString("cliparserSyntaxTplStr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Affiche le texte &quot;à propos&quot; du programme.
+        /// </summary>
+        internal static string parserOptAboutDesc {
+            get {
+                return ResourceManager.GetString("parserOptAboutDesc", resourceCulture);
             }
         }
         
@@ -187,7 +196,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Indique un modèle pour l&apos;affichage des traitements. Ex: [I_ENC] pour afficher l&apos;encodage du fichier en entré. N&apos;affiche pas la sortie classique.
+        ///   Recherche une chaîne localisée semblable à Indique un modèle pour l&apos;affichage des traitements. Ex: [IN_ENC] pour afficher l&apos;encodage du fichier en entré. N&apos;affiche pas la sortie classique.
         /// </summary>
         internal static string parserPatternedOutputDesc {
             get {

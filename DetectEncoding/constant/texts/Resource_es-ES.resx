@@ -118,63 +118,63 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="cliparserAlsoStr" xml:space="preserve">
-    <value>aussi</value>
+    <value>también</value>
   </data>
   <data name="cliparserOptArgMissingStr" xml:space="preserve">
-    <value>L'option -{0} doit être utilisée avec un argument.</value>
+    <value>La opción -{0} debe usarse con un argumento.</value>
   </data>
   <data name="cliparserOptMissingStr" xml:space="preserve">
-    <value>L'option -{0} est absente alors qu'elle est obligatoire.</value>
+    <value>La opción -{0} no aparece cuando es obligatoria.</value>
   </data>
   <data name="cliparserRequiredStr" xml:space="preserve">
-    <value>Obligatoire. </value>
+    <value>Obligatorio. </value>
   </data>
   <data name="cliparserSyntaxTplStr" xml:space="preserve">
-    <value>  Syntaxe : {0} OPTIONS</value>
+    <value> Sintaxis: {0} OPCIONES</value>
   </data>
   <data name="parserOptAboutDesc" xml:space="preserve">
-    <value>Affiche le texte "à propos" du programme</value>
+    <value>Visualizza il "circa" del programma</value>
   </data>
   <data name="parserOptFileDesc" xml:space="preserve">
-    <value>Chemin du fichier à analyser</value>
+    <value>Ruta del archivo a analizar</value>
   </data>
   <data name="parserOptOutputFileDesc" xml:space="preserve">
-    <value>Fichier cible pour la conversion. Si omis, le fichier se présentera sous la forme [Nom fichier input]-Out[Extension fichier input]. Si égale \"SAME_AS_INPUT\" alors même fichier que celui de l'option -f</value>
+    <value>Fichero de destino para la conversión. Si se omite, el archivo tendrá el aspecto de [Nombre de archivo de entrada]-Salida[Extensión de archivo de entrada]. Si es igual a "SAME_AS_INPUT" entonces el mismo archivo que la opción -f</value>
   </data>
   <data name="parserOptSilenceLevelDesc" xml:space="preserve">
-    <value>Permet de régler le nombre d'éléments affichés. 0 : tout est affiché (comme si -s absent), 1: juste les lignes de traitement, 2: rien n'est affiché</value>
+    <value>Ajusta el número de elementos que se muestran. 0: se muestra todo (como si -s estuviera ausente), 1: sólo líneas de procesamiento, 2: no se muestra nada</value>
   </data>
   <data name="parserOptTargetEncDesc" xml:space="preserve">
-    <value>Convertie l'encodage du fichier analysé dans un encodage cible : {0}. La conversion n'est possible que si l'encodage source a été détecté.</value>
+    <value>Convierte la codificación del archivo analizado en una codificación de destino: {0}. La conversión sólo es posible si se ha detectado la codificación de origen.</value>
   </data>
   <data name="parserOptTargetEolDesc" xml:space="preserve">
-    <value>Convertie le caractère de fin de ligne : {0}. La conversion n'est possible que si l'encodage source a été détecté.</value>
+    <value>Convierte el carácter de fin de línea : {0}. La conversión sólo es posible si se ha detectado la codificación de origen.</value>
   </data>
   <data name="parserParseErrorSandPin" xml:space="preserve">
-    <value>Erreur dans les options passées en entrée du programme. Les options -{0} et -{1} ne peuvent pas être utilisées en même temps.</value>
+    <value>Error en las opciones de entrada del programa. Las opciones -{0} y -{1} no se pueden utilizar al mismo tiempo.</value>
   </data>
   <data name="parserParseTrtEolNotExistTxt" xml:space="preserve">
-    <value>Le type de caractère de fin de ligne {0} n'existe pas. Type de caractères de fin de ligne possibles : {1}</value>
+    <value>El tipo de carácter de fin de línea {0} no existe. Tipo de posibles caracteres de fin de línea: {1}</value>
   </data>
   <data name="parserParseTrtFileNotFoundTxt" xml:space="preserve">
-    <value>Le fichier {0} n'existe pas</value>
+    <value>El archivo {0} no existe</value>
   </data>
   <data name="parserParseTrtSilenceLvlWrontTxt" xml:space="preserve">
-    <value>L'option -s doit être un entier de 0 à 2. '{0}' fournit.</value>
+    <value>La opción -s debe ser un número entero de 0 a 2. provee.</value>
   </data>
   <data name="parserPatternedOutputDesc" xml:space="preserve">
-    <value>Indique un modèle pour l'affichage des traitements. Ex: [IN_ENC] pour afficher l'encodage du fichier en entré. N'affiche pas la sortie classique</value>
+    <value>Indica una modelo para visualizar tratamientos. Ej: [IN_ENC] para mostrar la codificación del archivo de entrada. No visualiza la salida clásica</value>
   </data>
   <data name="programMoreHelpOn" xml:space="preserve">
-    <value> Plus d'aide sur http://wolfaryx.fr/?p=3041</value>
+    <value> Más ayuda en http://wolfaryx.fr/?p=3041</value>
   </data>
   <data name="programNoEncodingFound" xml:space="preserve">
-    <value> Aucun encodage détecté</value>
+    <value> No se detecta codificación</value>
   </data>
   <data name="programShowHeaderAuthor" xml:space="preserve">
-    <value> par Aryx - WolfAryx informatique -</value>
+    <value> por Aryx - WolfAryx informatique -</value>
   </data>
   <data name="programShowHeaderDisc" xml:space="preserve">
-    <value> Détection de l'encodage basée sur les travaux de AutoIt Consulting :</value>
+    <value> Detección de codificación basada en el trabajo de AutoIt Consulting :</value>
   </data>
 </root>

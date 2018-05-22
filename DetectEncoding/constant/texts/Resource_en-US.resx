@@ -124,13 +124,16 @@
     <value />
   </data>
   <data name="cliparserOptMissingStr" xml:space="preserve">
-    <value />
+    <value>Option -{0} is not present when it is mandatory.</value>
   </data>
   <data name="cliparserRequiredStr" xml:space="preserve">
     <value />
   </data>
   <data name="cliparserSyntaxTplStr" xml:space="preserve">
     <value />
+  </data>
+  <data name="parserOptAboutDesc" xml:space="preserve">
+    <value>Show an about text</value>
   </data>
   <data name="parserOptFileDesc" xml:space="preserve">
     <value>Path of file to analyze</value>
@@ -160,7 +163,7 @@
     <value>The -s option must be an integer from 0 to 2. '{0}' provides.</value>
   </data>
   <data name="parserPatternedOutputDesc" xml:space="preserve">
-    <value>Indicates a template for displaying treatments. Ex: [I_ENC] to display the encoding of the input file. Disable original standard output</value>
+    <value>Indicates a template for displaying treatments. Ex: [IN_ENC] to display the encoding of the input file. Disable original standard output</value>
   </data>
   <data name="programMoreHelpOn" xml:space="preserve">
     <value> More help on http://wolfaryx.fr/?p=3041</value>

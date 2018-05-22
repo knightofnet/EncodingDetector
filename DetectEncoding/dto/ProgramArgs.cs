@@ -16,5 +16,7 @@ namespace DetectEncoding.dto
         public string OutputFileName { get; set; }
         public int SilenceLevel { get; set; }
         public string OutputPattern { get; set; }
+
+        public bool IsShowAbout { get; set; }
     }
 }

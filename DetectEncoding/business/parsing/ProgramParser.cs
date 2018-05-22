@@ -16,7 +16,7 @@ namespace DetectEncoding.business.parsing
             LongOpt = "file",
             Description = LangMgr.Instance["parserOptFileDesc"],
             HasArgs = true,
-            IsMandatory = true,
+            IsMandatory = false,
             Name = "OptionFile"
         };
 
@@ -70,6 +70,16 @@ namespace DetectEncoding.business.parsing
             HasArgs = true,
             IsMandatory = false,
             Name = "PatternedOutput"
+        };
+
+        private readonly Option _optionAbout = new Option()
+        {
+            ShortOpt = "a",
+            LongOpt = "about",
+            Description = LangMgr.Instance["parserOptAboutDesc"],
+            HasArgs = false,
+            IsMandatory = false,
+            Name = "About"
         };
 
 
@@ -130,12 +140,20 @@ namespace DetectEncoding.business.parsing
             AddOption(_optionOutputFile);
             AddOption(_optionSilenceLevel);
             AddOption(_optionPatternedOutput);
+            AddOption(_optionAbout);
         }
 
         private ProgramArgs ParseTrt(Dictionary<string, Option> arg)
         {
             ProgramArgs p = new ProgramArgs();
             p.OutputEol = EnumEol.NONE;
+
+            // About
+            if (HasOption(_optionAbout, arg))
+            {
+                p.IsShowAbout = true;
+                return p;
+            }
 
             // Silence level and output-pattern sont mutuellement exclusive
             if (HasOption(_optionSilenceLevel, arg) && HasOption(_optionPatternedOutput, arg))
@@ -144,6 +162,10 @@ namespace DetectEncoding.business.parsing
             }
 
             // Input File path
+            if (!HasOption(_optionFile, arg))
+            {
+                throw new CliParsingException(String.Format(LangMgr.Instance["cliparserOptMissingStr"], _optionFile.ShortOpt));
+            }
             string fileUrl = GetSingleOptionValue(_optionFile.Name, arg);
             string fullPath = Path.GetFullPath(fileUrl);
             if (!File.Exists(fullPath))

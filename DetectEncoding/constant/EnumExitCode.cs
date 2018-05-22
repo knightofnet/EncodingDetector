@@ -6,6 +6,7 @@ namespace DetectEncoding.constant
     {
         public static readonly EnumExitCode DETECT_OK = new EnumExitCode("DETECT_OK", 0);
         public static readonly EnumExitCode DETECT_AND_REENC_OK = new EnumExitCode("DETECT_AND_REENC_OK", 1);
+        public static readonly EnumExitCode ABOUT_SHOWN = new EnumExitCode("ABOUT_SHOWN", 2);
 
 
         public static readonly EnumExitCode NO_ENC_FOUND = new EnumExitCode("NO_ENC_FOUND", 20);
@@ -26,6 +27,7 @@ namespace DetectEncoding.constant
             {
                 yield return DETECT_OK;
                 yield return DETECT_AND_REENC_OK;
+                yield return ABOUT_SHOWN;
                 yield return NO_ENC_FOUND;
                 yield return ERROR_PARAM_IN;
                 yield return ERROR_DETECT_ENC;

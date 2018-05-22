@@ -22,14 +22,14 @@ namespace DetectEncoding.constant.texts {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resource_en_US {
+    internal class Resource_es_ES {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resource_en_US() {
+        internal Resource_es_ES() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace DetectEncoding.constant.texts {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DetectEncoding.constant.texts.Resource_en-US", typeof(Resource_en_US).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DetectEncoding.constant.texts.Resource_es-ES", typeof(Resource_es_ES).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +61,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à .
+        ///   Recherche une chaîne localisée semblable à también.
         /// </summary>
         internal static string cliparserAlsoStr {
             get {
@@ -70,7 +70,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à .
+        ///   Recherche une chaîne localisée semblable à La opción -{0} debe usarse con un argumento..
         /// </summary>
         internal static string cliparserOptArgMissingStr {
             get {
@@ -79,7 +79,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Option -{0} is not present when it is mandatory..
+        ///   Recherche une chaîne localisée semblable à La opción -{0} no aparece cuando es obligatoria..
         /// </summary>
         internal static string cliparserOptMissingStr {
             get {
@@ -88,7 +88,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à .
+        ///   Recherche une chaîne localisée semblable à Obligatorio. .
         /// </summary>
         internal static string cliparserRequiredStr {
             get {
@@ -97,7 +97,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à .
+        ///   Recherche une chaîne localisée semblable à  Sintaxis: {0} OPCIONES.
         /// </summary>
         internal static string cliparserSyntaxTplStr {
             get {
@@ -106,7 +106,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Show an about text.
+        ///   Recherche une chaîne localisée semblable à Visualizza il &quot;circa&quot; del programma.
         /// </summary>
         internal static string parserOptAboutDesc {
             get {
@@ -115,7 +115,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Path of file to analyze.
+        ///   Recherche une chaîne localisée semblable à Ruta del archivo a analizar.
         /// </summary>
         internal static string parserOptFileDesc {
             get {
@@ -124,7 +124,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Target file for conversion. If omitted, the file will look like [Input file name]-Out[Input file extension]. If equal to &quot;SAME_AS_INPUT&quot; then same file as -f option.
+        ///   Recherche une chaîne localisée semblable à Fichero de destino para la conversión. Si se omite, el archivo tendrá el aspecto de [Nombre de archivo de entrada]-Salida[Extensión de archivo de entrada]. Si es igual a &quot;SAME_AS_INPUT&quot; entonces el mismo archivo que la opción -f.
         /// </summary>
         internal static string parserOptOutputFileDesc {
             get {
@@ -133,7 +133,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Adjusts the number of items displayed. 0: everything is displayed (as if -s absent), 1: just processing lines, 2: nothing is displayed.
+        ///   Recherche une chaîne localisée semblable à Ajusta el número de elementos que se muestran. 0: se muestra todo (como si -s estuviera ausente), 1: sólo líneas de procesamiento, 2: no se muestra nada.
         /// </summary>
         internal static string parserOptSilenceLevelDesc {
             get {
@@ -142,7 +142,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Converts the encoding of the analyzed file into a target encoding: {0}. Conversion is only possible if the source encoding has been detected..
+        ///   Recherche une chaîne localisée semblable à Convierte la codificación del archivo analizado en una codificación de destino: {0}. La conversión sólo es posible si se ha detectado la codificación de origen..
         /// </summary>
         internal static string parserOptTargetEncDesc {
             get {
@@ -151,7 +151,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Converts the end of line character : {0}. Conversion is only possible if the source encoding has been detected..
+        ///   Recherche une chaîne localisée semblable à Convierte el carácter de fin de línea : {0}. La conversión sólo es posible si se ha detectado la codificación de origen..
         /// </summary>
         internal static string parserOptTargetEolDesc {
             get {
@@ -160,7 +160,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Error in the input options of the program. Options -{0} and -{1} cannot be used at the same time..
+        ///   Recherche une chaîne localisée semblable à Error en las opciones de entrada del programa. Las opciones -{0} y -{1} no se pueden utilizar al mismo tiempo..
         /// </summary>
         internal static string parserParseErrorSandPin {
             get {
@@ -169,7 +169,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The end of line character &apos;{0}&apos; does not exist. Type of possible: {1}.
+        ///   Recherche une chaîne localisée semblable à El tipo de carácter de fin de línea {0} no existe. Tipo de posibles caracteres de fin de línea: {1}.
         /// </summary>
         internal static string parserParseTrtEolNotExistTxt {
             get {
@@ -178,7 +178,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The file {0} does not exist.
+        ///   Recherche une chaîne localisée semblable à El archivo {0} no existe.
         /// </summary>
         internal static string parserParseTrtFileNotFoundTxt {
             get {
@@ -187,7 +187,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The -s option must be an integer from 0 to 2. &apos;{0}&apos; provides..
+        ///   Recherche une chaîne localisée semblable à La opción -s debe ser un número entero de 0 a 2. provee..
         /// </summary>
         internal static string parserParseTrtSilenceLvlWrontTxt {
             get {
@@ -196,7 +196,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Indicates a template for displaying treatments. Ex: [IN_ENC] to display the encoding of the input file. Disable original standard output.
+        ///   Recherche une chaîne localisée semblable à Indica una modelo para visualizar tratamientos. Ej: [IN_ENC] para mostrar la codificación del archivo de entrada. No visualiza la salida clásica.
         /// </summary>
         internal static string parserPatternedOutputDesc {
             get {
@@ -205,7 +205,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à  More help on http://wolfaryx.fr/?p=3041.
+        ///   Recherche une chaîne localisée semblable à  Más ayuda en http://wolfaryx.fr/?p=3041.
         /// </summary>
         internal static string programMoreHelpOn {
             get {
@@ -214,7 +214,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à  No encoding found.
+        ///   Recherche une chaîne localisée semblable à  No se detecta codificación.
         /// </summary>
         internal static string programNoEncodingFound {
             get {
@@ -223,7 +223,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à  by Aryx - Wolfaryx informatique -.
+        ///   Recherche une chaîne localisée semblable à  por Aryx - WolfAryx informatique -.
         /// </summary>
         internal static string programShowHeaderAuthor {
             get {
@@ -232,7 +232,7 @@ namespace DetectEncoding.constant.texts {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à  Encoding detection based on AutoIt Consulting work:.
+        ///   Recherche une chaîne localisée semblable à  Detección de codificación basada en el trabajo de AutoIt Consulting :.
         /// </summary>
         internal static string programShowHeaderDisc {
             get {

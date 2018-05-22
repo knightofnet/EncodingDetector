@@ -52,17 +52,11 @@ namespace DetectEncoding.business
                 using (StreamWriter sw = StreamUtils.GetStreamWriterFromEAppEncoding(outFileName, OutputEncoding))
                 {
                     String line = null;
-                    bool isFirstLine = true;
+
                     while ((line = sr.ReadLine()) != null)
                     {
-                        if (!isFirstLine)
-                        {
-                            sw.Write(OutputEol.EolChar);
-                        }
-
                         sw.Write(line);
-                        isFirstLine = false;
-
+                        sw.Write(OutputEol.EolChar);
                     }
                 }
             }

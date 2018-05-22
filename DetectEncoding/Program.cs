@@ -21,7 +21,8 @@ namespace DetectEncoding
         {
             LangMgr.AddResourceManager("fr", Resource_fr_Fr.ResourceManager);
             LangMgr.AddResourceManager("en", Resource_en_US.ResourceManager);
-            //LangMgr.ForceCulture("fr");
+            LangMgr.AddResourceManager("es", Resource_es_ES.ResourceManager);
+            //LangMgr.ForceCulture("es");
             TranslateCliParser();
 
             ProgramParser argParser = new ProgramParser();
@@ -34,6 +35,14 @@ namespace DetectEncoding
                 ProgramArgs objArgs = argParser.ParseDirect(args);
 
                 MiscAppUtils.ConditionnalExecCode(objArgs.SilenceLevel, 1, ShowHeaderApp);
+                // N'affiche que le header
+                if (objArgs.IsShowAbout)
+                {
+                    Console.WriteLine(LangMgr.Instance["programMoreHelpOn"]);
+                    Console.WriteLine();
+                    batchExitCode = EnumExitCode.ABOUT_SHOWN;
+                    Environment.Exit(batchExitCode.ExitCode);
+                }
                 MiscAppUtils.ConditionnalWrtLine(objArgs.SilenceLevel, 2, " InputFile: {0}", objArgs.InputFileName);
 
                 // Détection encodage

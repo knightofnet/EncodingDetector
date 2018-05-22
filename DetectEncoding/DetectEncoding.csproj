@@ -64,6 +64,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource_en-US.resx</DependentUpon>
     </Compile>
+    <Compile Include="constant\texts\Resource_es-ES.Designer.cs">
+      <DependentUpon>Resource_es-ES.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="dto\OutputConf.cs" />
     <Compile Include="dto\ProgramArgs.cs" />
     <Compile Include="exception\DetectEncodeException.cs" />
@@ -103,6 +108,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource_en-US.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="constant\texts\Resource_es-ES.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource_es-ES.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="constant\texts\Resource_fr-Fr.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource_fr-Fr.Designer.cs</LastGenOutput>
@@ -110,6 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="runForAFolder.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
