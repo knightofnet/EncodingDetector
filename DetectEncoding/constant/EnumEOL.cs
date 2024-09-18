@@ -40,9 +40,9 @@ namespace DetectEncoding.constant
 
         public static string LibelleJoined()
         {
-            List<String> strRet = Values.Select(value => value.Libelle).ToList();
+            List<string> strRet = Values.Select(value => value.Libelle).ToList();
 
-            return String.Join(", ", strRet);
+            return string.Join(", ", strRet);
         }
 
         public static EnumEol GetFromLibelle(string encodingInput)

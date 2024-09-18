@@ -1,8 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using AutoIt.Common;
+
 using DetectEncoding.constant;
+using TextEncodingDetect = DetectEncoding.business.TextEncodingDetect;
 
 namespace DetectEncoding.utils
 {

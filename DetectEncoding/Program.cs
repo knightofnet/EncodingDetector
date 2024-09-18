@@ -233,7 +233,7 @@ namespace DetectEncoding
         {
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("");
-            Console.WriteLine(" Encoding Detector - v{0}", Assembly.GetExecutingAssembly().GetName().Version);
+            Console.WriteLine($" Encoding Detector - v{Assembly.GetExecutingAssembly().GetName().Version}");
             Console.WriteLine(" ===================================");
             Console.WriteLine(LangMgr.Instance["programShowHeaderAuthor"] + " 2018");
             Console.WriteLine("");
@@ -300,7 +300,7 @@ namespace DetectEncoding
         private static void TranslateCliParser()
         {
 
-            String langKey = "cliparserAlsoStr";
+            string langKey = "cliparserAlsoStr";
             if (!LangMgr.Instance[langKey].IsEmpty())
                 CliParserLangRef.CwWriteLines_Also = LangMgr.Instance[langKey];
 

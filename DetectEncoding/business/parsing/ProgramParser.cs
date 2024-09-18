@@ -24,7 +24,7 @@ namespace DetectEncoding.business.parsing
         {
             ShortOpt = "c",
             LongOpt = "convert-to",
-            Description = String.Format(LangMgr.Instance["parserOptTargetEncDesc"],
+            Description = string.Format(LangMgr.Instance["parserOptTargetEncDesc"],
                                         EnumAppEncoding.LibelleJoined()),
             HasArgs = true,
             IsMandatory = false,
@@ -35,7 +35,7 @@ namespace DetectEncoding.business.parsing
         {
             ShortOpt = "e",
             LongOpt = "end-of-line-to",
-            Description = String.Format(LangMgr.Instance["parserOptTargetEolDesc"],
+            Description = string.Format(LangMgr.Instance["parserOptTargetEolDesc"],
                                         EnumEol.LibelleJoined()),
             HasArgs = true,
             IsMandatory = false,
@@ -110,7 +110,7 @@ namespace DetectEncoding.business.parsing
                 if (!StringUtils.IsEmpty(silenceLevelRaw))
                 {
                     short result = 0;
-                    if (Int16.TryParse(silenceLevelRaw, out result) && result >= 0 && result <= 2)
+                    if (short.TryParse(silenceLevelRaw, out result) && result >= 0 && result <= 2)
                     {
                         p.SilenceLevel = result;
                     }
@@ -158,19 +158,19 @@ namespace DetectEncoding.business.parsing
             // Silence level and output-pattern sont mutuellement exclusive
             if (HasOption(_optionSilenceLevel, arg) && HasOption(_optionPatternedOutput, arg))
             {
-                throw new CliParsingException(String.Format(LangMgr.Instance["parserParseErrorSandPin"], _optionSilenceLevel.ShortOpt, _optionPatternedOutput.ShortOpt));
+                throw new CliParsingException(string.Format(LangMgr.Instance["parserParseErrorSandPin"], _optionSilenceLevel.ShortOpt, _optionPatternedOutput.ShortOpt));
             }
 
             // Input File path
             if (!HasOption(_optionFile, arg))
             {
-                throw new CliParsingException(String.Format(LangMgr.Instance["cliparserOptMissingStr"], _optionFile.ShortOpt));
+                throw new CliParsingException(string.Format(LangMgr.Instance["cliparserOptMissingStr"], _optionFile.ShortOpt));
             }
             string fileUrl = GetSingleOptionValue(_optionFile.Name, arg);
             string fullPath = Path.GetFullPath(fileUrl);
             if (!File.Exists(fullPath))
             {
-                throw new CliParsingException(String.Format(LangMgr.Instance["parserParseTrtFileNotFoundTxt"], fullPath));
+                throw new CliParsingException(string.Format(LangMgr.Instance["parserParseTrtFileNotFoundTxt"], fullPath));
             }
             p.InputFileName = fullPath;
 
@@ -179,13 +179,13 @@ namespace DetectEncoding.business.parsing
             if (!StringUtils.IsEmpty(silenceLevelRaw))
             {
                 short result = 0;
-                if (Int16.TryParse(silenceLevelRaw, out result) && result >= 0 && result <= 2)
+                if (short.TryParse(silenceLevelRaw, out result) && result >= 0 && result <= 2)
                 {
                     p.SilenceLevel = result;
                 }
                 else
                 {
-                    throw new CliParsingException(String.Format(LangMgr.Instance["parserParseTrtSilenceLvlWrontTxt"],
+                    throw new CliParsingException(string.Format(LangMgr.Instance["parserParseTrtSilenceLvlWrontTxt"],
                         result));
                 }
             }
@@ -209,7 +209,7 @@ namespace DetectEncoding.business.parsing
                 if (enEolIn == null)
                 {
                     throw new CliParsingException(
-                        String.Format(LangMgr.Instance["parserParseTrtEolNotExistTxt"],
+                        string.Format(LangMgr.Instance["parserParseTrtEolNotExistTxt"],
                                       eolInput, EnumEol.LibelleJoined()));
                 }
 
@@ -249,7 +249,7 @@ namespace DetectEncoding.business.parsing
             if (HasOption(_optionOutputFile.Name, arg))
             {
 
-                String outputFile = GetSingleOptionValue(_optionOutputFile.Name, arg);
+                string outputFile = GetSingleOptionValue(_optionOutputFile.Name, arg);
                 if ("SAME_AS_INPUT".Equals(outputFile))
                 {
                     outputFile = p.InputFileName;

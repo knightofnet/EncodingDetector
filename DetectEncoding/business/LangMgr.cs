@@ -10,20 +10,20 @@ namespace DetectEncoding.business
     {
         private static LangMgr _instance;
 
-        private static readonly Dictionary<String, ResourceManager> _resourceManagerByCulture =
+        private static readonly Dictionary<string, ResourceManager> ResourceManagerByCulture =
             new Dictionary<string, ResourceManager>(1);
 
         private static string _dftCulture;
 
-        public static void AddResourceManager(String cultureTwoLetterRm, ResourceManager resourceManager)
+        public static void AddResourceManager(string cultureTwoLetterRm, ResourceManager resourceManager)
         {
-            _resourceManagerByCulture.Add(cultureTwoLetterRm, resourceManager);
+            ResourceManagerByCulture.Add(cultureTwoLetterRm, resourceManager);
 
         }
 
         public static void ForceCulture(string twoLetterCulture)
         {
-            if (_resourceManagerByCulture.ContainsKey(twoLetterCulture))
+            if (ResourceManagerByCulture.ContainsKey(twoLetterCulture))
             {
                 _dftCulture = twoLetterCulture;
             }
@@ -33,17 +33,13 @@ namespace DetectEncoding.business
             }
         }
 
-        public static LangMgr Instance
-        {
-            get { return GetInstance(); }
-            private set { _instance = value; }
-        }
+        public static LangMgr Instance => GetInstance();
 
         private static LangMgr GetInstance()
         {
             if (_instance == null)
             {
-                if (_resourceManagerByCulture.Count == 0)
+                if (ResourceManagerByCulture.Count == 0)
                 {
                     throw new Exception("LangMgr has no ResourceManager set");
                 }
@@ -54,25 +50,22 @@ namespace DetectEncoding.business
         }
 
 
-        public String LangangeTwoLetter { get; private set; }
+        public string LangangeTwoLetter { get; private set; }
 
-        public String this[string str]
-        {
-            get { return _currentManager.GetString(str); }
-
-        }
+        public string this[string str] => _currentManager.GetString(str);
 
         private readonly ResourceManager _currentManager;
 
 
 
-        private LangMgr(String culture)
+        private LangMgr(string culture)
         {
             LangangeTwoLetter = culture;
 
-            if (_resourceManagerByCulture.ContainsKey(culture))
+            if (ResourceManagerByCulture.TryGetValue(culture, out ResourceManager ressMgr))
             {
-                _currentManager = _resourceManagerByCulture[culture];
+                _currentManager = ressMgr;
+
             }
 
 

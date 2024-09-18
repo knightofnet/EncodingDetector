@@ -9,9 +9,9 @@ namespace DetectEncoding.business
     class OutputFileWriter
     {
 
-        public String InputFileName { get; private set; }
+        public string InputFileName { get; private set; }
 
-        public String OutputFileName { get; private set; }
+        public string OutputFileName { get; private set; }
 
         public EnumAppEncoding InputEncoding { get; private set; }
 
@@ -40,7 +40,7 @@ namespace DetectEncoding.business
         public void ToFile()
         {
 
-            String outFileName = OutputFileName;
+            string outFileName = OutputFileName;
             if (_useTempOutputFile)
             {
                 outFileName = Path.GetTempFileName();
@@ -51,7 +51,7 @@ namespace DetectEncoding.business
             {
                 using (StreamWriter sw = StreamUtils.GetStreamWriterFromEAppEncoding(outFileName, OutputEncoding))
                 {
-                    String line = null;
+                    string line = null;
 
                     while ((line = sr.ReadLine()) != null)
                     {
