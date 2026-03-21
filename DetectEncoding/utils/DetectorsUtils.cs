@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 
 using DetectEncoding.constant;
 using TextEncodingDetect = DetectEncoding.business.TextEncodingDetect;
@@ -15,17 +13,17 @@ namespace DetectEncoding.utils
             var textDetect = new TextEncodingDetect();
 
             byte[] array = File.ReadAllBytes(filename);
-            TextEncodingDetect.Encoding encoding = textDetect.DetectEncoding(array, array.Length - 1);
-            return encoding;
+            if (array.Length == 0)
+            {
+                return TextEncodingDetect.Encoding.None;
+            }
 
-
+            return textDetect.DetectEncoding(array, array.Length);
         }
 
         public static EnumEol DetectEol(string filename, EnumAppEncoding inEncoding)
         {
             EnumEol enumRet = EnumEol.NONE;
-
-            int[] tabInt = new int[500];
 
             using (StreamReader sr = StreamUtils.GetStreamReaderFromEAppEncoding(filename, inEncoding))
             {
@@ -39,8 +37,6 @@ namespace DetectEncoding.utils
                 int charAtN = 0;
                 int positionN = 0;
 
-
-                int i = 0;
                 while (sr.Peek() >= 0)
                 {
                     positionN++;
@@ -51,15 +47,11 @@ namespace DetectEncoding.utils
                     }
                     charAtN = sr.Read();
 
-
-                    tabInt[i++] = charAtN;
-
                     // Il faut au minimum 2 caractères pour déterminer le EOL
                     if (positionN <= 1) continue;
 
                     if (charAtN == 10 && charAtN1 == 13)
                     {
-                        //Console.WriteLine(string.Join(" ", tabInt));
                         enumRet = EnumEol.DOS;
                     }
                     else if (charAtN1 == 10)
@@ -78,9 +70,6 @@ namespace DetectEncoding.utils
                 }
 
             }
-
-            //Console.WriteLine(string.Join(" ", tabInt));
-
 
             return enumRet;
         }

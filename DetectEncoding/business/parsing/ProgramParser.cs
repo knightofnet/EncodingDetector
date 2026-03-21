@@ -233,7 +233,7 @@ namespace DetectEncoding.business.parsing
                     {
                         p.OutputEncoding = EnumAppEncoding.UTF8_BOM;
                     }
-                    if ("UTF8NOBOM".Equals(encodingInput) | "UTF-8-NOBOM".Equals(encodingInput))
+                    else if ("UTF8NOBOM".Equals(encodingInput) || "UTF-8-NOBOM".Equals(encodingInput))
                     {
                         p.OutputEncoding = EnumAppEncoding.UTF8_NOBOM;
                     }

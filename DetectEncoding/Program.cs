@@ -22,7 +22,6 @@ namespace DetectEncoding
             LangMgr.AddResourceManager("fr", Resource_fr_Fr.ResourceManager);
             LangMgr.AddResourceManager("en", Resource_en_US.ResourceManager);
             LangMgr.AddResourceManager("es", Resource_es_ES.ResourceManager);
-            //LangMgr.ForceCulture("es");
             TranslateCliParser();
 
             ProgramParser argParser = new ProgramParser();
@@ -49,13 +48,13 @@ namespace DetectEncoding
                 EnumAppEncoding inEncTransType;
                 EnumEol resultEol;
                 EnumExitCode exitCode = DetecteFileEncAndEol(out inEncTransType, out resultEol, objArgs);
+
+                OutputConf outConf = new OutputConf();
                 if (exitCode != EnumExitCode.DETECT_OK)
                 {
                     batchExitCode = exitCode;
                 }
-
-                OutputConf outConf = new OutputConf();
-                if (!objArgs.IsConvertMode)
+                else if (!objArgs.IsConvertMode)
                 {
                     batchExitCode = EnumExitCode.DETECT_OK;
                 }
@@ -279,7 +278,7 @@ namespace DetectEncoding
         {
             StringBuilder str = new StringBuilder(batchArgs.OutputPattern);
             str.Replace("[IN_FILE]", batchArgs.InputFileName);
-            str.Replace("[IN_ENC]", resultInputEncoding.Libelle);
+            str.Replace("[IN_ENC]", resultInputEncoding != null ? resultInputEncoding.Libelle : "NONE");
             str.Replace("[IN_EOL]", resultInputEol.Libelle);
 
             str.Replace("[OUT_ENC]", outputConfObj.OutputEncoding != null ? outputConfObj.OutputEncoding.Libelle : "");
