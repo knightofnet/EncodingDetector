@@ -4,47 +4,52 @@ using DetectEncoding.constant;
 
 namespace DetectEncoding.utils
 {
-    class StreamUtils
+    internal class StreamUtils
     {
         public static StreamReader GetStreamReaderFromEAppEncoding(string inputFileName, EnumAppEncoding encoding)
         {
+            Encoding csEncoding;
             if (encoding.Equals(EnumAppEncoding.UTF8_NOBOM) || encoding.Equals(EnumAppEncoding.UTF8_BOM))
             {
-                return new StreamReader(File.Open(inputFileName, FileMode.Open), new UTF8Encoding(encoding.OptionWithUtf8Bom));
+                csEncoding = new UTF8Encoding(encoding.OptionWithUtf8Bom);
             }
-
-            if (encoding.Equals(EnumAppEncoding.UTF16BE_NOBOM) || encoding.Equals(EnumAppEncoding.UTF16BE_BOM))
+            else if (encoding.Equals(EnumAppEncoding.UTF16BE_NOBOM) || encoding.Equals(EnumAppEncoding.UTF16BE_BOM))
             {
-                return new StreamReader(File.Open(inputFileName, FileMode.Open), new UnicodeEncoding(true, encoding.OptionWithUtf8Bom));
+                csEncoding = new UnicodeEncoding(true, encoding.OptionWithUtf8Bom);
             }
-
-            if (encoding.Equals(EnumAppEncoding.UTF16LE_NOBOM) || encoding.Equals(EnumAppEncoding.UTF16LE_BOM))
+            else if (encoding.Equals(EnumAppEncoding.UTF16LE_NOBOM) || encoding.Equals(EnumAppEncoding.UTF16LE_BOM))
             {
-                return new StreamReader(File.Open(inputFileName, FileMode.Open), new UnicodeEncoding(false, encoding.OptionWithUtf8Bom));
+                csEncoding = new UnicodeEncoding(false, encoding.OptionWithUtf8Bom);
+            }
+            else
+            {
+                csEncoding = encoding.CsEncoding;
             }
 
-
-            return new StreamReader(File.Open(inputFileName, FileMode.Open), encoding.CsEncoding);
+            return new StreamReader(File.OpenRead(inputFileName), csEncoding);
         }
 
         public static StreamWriter GetStreamWriterFromEAppEncoding(string outFileName, EnumAppEncoding encoding)
         {
+            Encoding csEncoding;
             if (encoding.Equals(EnumAppEncoding.UTF8_NOBOM) || encoding.Equals(EnumAppEncoding.UTF8_BOM))
             {
-                return new StreamWriter(File.Open(outFileName, FileMode.Create), new UTF8Encoding(encoding.OptionWithUtf8Bom));
+                csEncoding = new UTF8Encoding(encoding.OptionWithUtf8Bom);
             }
-
-            if (encoding.Equals(EnumAppEncoding.UTF16BE_NOBOM) || encoding.Equals(EnumAppEncoding.UTF16BE_BOM))
+            else if (encoding.Equals(EnumAppEncoding.UTF16BE_NOBOM) || encoding.Equals(EnumAppEncoding.UTF16BE_BOM))
             {
-                return new StreamWriter(File.Open(outFileName, FileMode.Create), new UnicodeEncoding(true, encoding.OptionWithUtf8Bom));
+                csEncoding = new UnicodeEncoding(true, encoding.OptionWithUtf8Bom);
             }
-
-            if (encoding.Equals(EnumAppEncoding.UTF16LE_NOBOM) || encoding.Equals(EnumAppEncoding.UTF16LE_BOM))
+            else if (encoding.Equals(EnumAppEncoding.UTF16LE_NOBOM) || encoding.Equals(EnumAppEncoding.UTF16LE_BOM))
             {
-                return new StreamWriter(File.Open(outFileName, FileMode.Create), new UnicodeEncoding(false, encoding.OptionWithUtf8Bom));
+                csEncoding = new UnicodeEncoding(false, encoding.OptionWithUtf8Bom);
+            }
+            else
+            {
+                csEncoding = encoding.CsEncoding;
             }
 
-            return new StreamWriter(File.Open(outFileName, FileMode.Create), encoding.CsEncoding);
+            return new StreamWriter(File.Open(outFileName, FileMode.Create, FileAccess.Write), csEncoding);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace DetectEncoding.exception
 {
-    class DetectEncodeException : Exception
+    internal class DetectEncodeException : Exception
     {
         public DetectEncodeException(string message, Exception innerException)
             : base(message, innerException)

@@ -62,13 +62,24 @@ namespace DetectEncoding.business
         {
             LangangeTwoLetter = culture;
 
-            if (ResourceManagerByCulture.TryGetValue(culture, out ResourceManager ressMgr))
+            ResourceManager ressMgr;
+            if (!ResourceManagerByCulture.TryGetValue(culture, out ressMgr) &&
+                !ResourceManagerByCulture.TryGetValue("en", out ressMgr))
             {
-                _currentManager = ressMgr;
-
+                // Fall back to the first available resource manager
+                foreach (ResourceManager rm in ResourceManagerByCulture.Values)
+                {
+                    ressMgr = rm;
+                    break;
+                }
             }
 
+            if (ressMgr == null)
+            {
+                throw new InvalidOperationException("LangMgr has no ResourceManager set for culture '" + culture + "'.");
+            }
 
+            _currentManager = ressMgr;
         }
     }
 }

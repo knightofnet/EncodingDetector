@@ -63,11 +63,22 @@ namespace DetectEncoding.business
 
             if (_useTempOutputFile)
             {
-                if (File.Exists(OutputFileName))
+                try
                 {
-                    File.Delete(OutputFileName);
+                    if (File.Exists(OutputFileName))
+                    {
+                        File.Delete(OutputFileName);
+                    }
+                    File.Move(outFileName, OutputFileName);
                 }
-                File.Move(outFileName, OutputFileName);
+                catch
+                {
+                    if (File.Exists(outFileName))
+                    {
+                        File.Delete(outFileName);
+                    }
+                    throw;
+                }
             }
 
         }
